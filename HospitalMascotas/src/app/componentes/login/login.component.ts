@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/servicios/login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,9 +11,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   status:boolean;
-  msj: String='';
+  msj:String='';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private loginService) {
 
   }
   
@@ -29,8 +30,7 @@ export class LoginComponent implements OnInit {
       this.msj = "Formulario invalido.";
       return;
     }
-    let loginService = new LoginService();
-    if (!loginService.verificar(form.value.lemail, form.value.lpass)){
+    if (!this.loginService.verificar(form.value.lemail, form.value.lpass)){
       this.msj = "Email o contraseña incorrectos.";
       return;
     }
