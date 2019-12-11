@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
 
+  dueno:boolean;
+  admin:boolean;
+  vet:boolean;
+
   constructor() { }
 
   ngOnInit() {
+    this.dueno = false;
+    this.vet = true;
+    this.admin = false;
+    /**
+     * Aca se pondria en true el rol del usuario logueado
+     */
   }
 
 }

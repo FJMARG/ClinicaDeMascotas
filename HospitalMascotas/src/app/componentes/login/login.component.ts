@@ -29,11 +29,13 @@ export class LoginComponent implements OnInit {
       this.msj = "Formulario invalido.";
       return;
     }
-    let loginService = new LoginService();
-    if (!loginService.verificar(form.value.lemail, form.value.lpass)){
-      this.msj = "Email o contraseña incorrectos.";
-      return;
-    }
+    /**
+    * let loginService = new LoginService();
+    * if (!loginService.verificar(form.value.lemail, form.value.lpass)){
+    *  this.msj = "Email o contraseña incorrectos.";
+    *  return;
+    * }
+    */
     this.setStatus(true);
     this.router.navigate(['/board']);
   }
