@@ -9,6 +9,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { RegistroService } from './servicios/registro.service';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './componentes/login/login.component';
+import { NavComponent } from './componentes/nav/nav.component';
+import { BoardComponent } from './componentes/board/board.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
@@ -21,7 +24,10 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    RegistroComponent
+    RegistroComponent,
+    LoginComponent,
+    NavComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,
