@@ -1,0 +1,51 @@
+<!-- En el directorio componentes van las componentes, que serian cada parte que va a estar en la pagina web. Se le puede establecer su propio comportamiento y sus estilos -->
+<!-- En el directorio servicios va toda la logica de negocio, desde aqui vamos a acceder a la api rest -->
+<!-- En el directorio modelos van a ir todas las clases o beans -->
+
+<!-- Crear componente: ng g c --spec false NOMBRE -->
+<!-- Crear modelo: ng g class NOMBRE -->
+<!-- Crear servicio: ng generate service NOMBRE -->
+
+<!-- Selectores -->
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">{{title}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Inicio<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/registro">Registro</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Acerca de Nosotros</a>
+            </li>
+            <li class="nav-item dropdown" *ngIf="logged">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+        <form #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login(loginForm)">
+            <input class="form-control mr-sm-2" type="email" placeholder="Email" aria-label="Email" name="lemail" id="lemail" ngModel required>
+            <input class="form-control mr-sm-2" type="password" placeholder="Contraseña" aria-label="Contraseña" name="lpass" id="lpass" ngModel required>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+        </form>
+    </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<footer class="container">
+    <p>&copy; Company 2017-2019</p>
+</footer>

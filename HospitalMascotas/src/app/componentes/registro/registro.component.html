@@ -1,0 +1,145 @@
+<div class="container _padding-top">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="offset-md-3 col-md-6 offset-md-3">
+            <div class="alert {{classstatus}}" role="alert">{{status}}</div>
+            <form #registroForm="ngForm" (ngSubmit)="onSubmit(registroForm)" class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="cuenta" class="cols-sm-2 control-label">Tipo de Cuenta</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <select [(ngModel)]="selected" class="form-control" name="cuenta" id="cuenta" >
+                                        <option value="DUEÑO">Dueño</option>
+                                        <option value="VETERINARIO">Veterinario</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="selected === 'VETERINARIO'">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="consultorio" class="cols-sm-2 control-label">Consultorio</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="consultorio" id="consultorio" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">Nombre</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="nombre" id="nombre"ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="username" class="cols-sm-2 control-label">Apellido</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="apellido" id="apellido" ngModel/>
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" name="publicApe" ngModel>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="telefono" class="cols-sm-2 control-label">Telefono</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="telefono" id="telefono" ngModel/>
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" name="publicTel" ngModel>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email" class="cols-sm-2 control-label">Email</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="email" id="email" ngModel/>
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" name="publicEmail" ngModel>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cEmail" class="cols-sm-2 control-label">Confirmar Email</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="cEmail" id="cEmail" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="password" class="cols-sm-2 control-label">Contraseña</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" name="password" id="password" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="confirm" class="cols-sm-2 control-label">Confirmar Contraseña</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <input type="password" class="form-control" name="confirm" id="confirm" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <small>Selecciona los campos que seran publicos antes de enviar el formulario.</small>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Registrarse</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <button type="reset" class="btn btn-secondary btn-lg btn-block">Vaciar Campos</button>
+                        </div>
+                    </div>
+                </div>
+                {{hola}}
+            </form>
+        </div>
+    </div>
+</div> <!-- /container -->
