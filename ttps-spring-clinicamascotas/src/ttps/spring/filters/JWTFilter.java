@@ -27,6 +27,7 @@ import ttps.spring.services.TokenServices;
 @WebFilter("/akjjyglc")
 public class JWTFilter implements Filter {
 
+	@SuppressWarnings("unused")
 	private FilterConfig filterConf;
 
     @Override
@@ -39,13 +40,11 @@ public class JWTFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
 
         // El login del usuarios es publico
-        if ("/jwt/auth".equals(req.getRequestURI()) ||
-                HttpMethod.OPTIONS.matches(req.getMethod())) {
-
+        if ("/auth".equals(req.getRequestURI()) || HttpMethod.OPTIONS.matches(req.getMethod())) {
             chain.doFilter(request, response);
             return;
         }
-
+        
         String token = req.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (token == null || !TokenServices.validateToken(token)) {
