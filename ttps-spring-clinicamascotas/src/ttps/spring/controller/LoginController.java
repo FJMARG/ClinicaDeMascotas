@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ttps.spring.clasesDAO.UsuarioDAO;
+import ttps.spring.model.LoginFormData;
 import ttps.spring.model.TokenData;
 import ttps.spring.model.Usuario;
 import ttps.spring.services.TokenServices;
@@ -25,11 +26,11 @@ public class LoginController {
     private final int EXPIRATION_IN_SEC = 1200;
 
     @PostMapping(path = "/auth")
-    public ResponseEntity<?> authenticate(@RequestBody String email, @RequestBody String pass) {
-    	Usuario u = usuarioDAO.recuperar(email);
-        if(u != null && u.getPassword().equals(pass)) {
-            String token = tokenServices.generateToken(email, u.getRolUsuario(), EXPIRATION_IN_SEC);
-            return ResponseEntity.ok(new TokenData(token, EXPIRATION_IN_SEC, email,u.getRolUsuario()));
+    public ResponseEntity<?> authenticate(@RequestBody LoginFormData form) {
+    	Usuario u = usuarioDAO.recuperar(form.getEmail());
+        if(u != null && u.getPassword().equals(form.getPassword())) {
+            String token = tokenServices.generateToken(form.getEmail(), u.getRolUsuario(), EXPIRATION_IN_SEC);
+            return ResponseEntity.ok(new TokenData(token, EXPIRATION_IN_SEC, form.getEmail(),u.getRolUsuario()));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o password incorrecto");
         }

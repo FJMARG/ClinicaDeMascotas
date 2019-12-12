@@ -24,7 +24,7 @@ import ttps.spring.services.TokenServices;
 
 /* Setear bien la url */
 
-@WebFilter("/akjjyglc")
+@WebFilter("/*")
 public class JWTFilter implements Filter {
 
 	@SuppressWarnings("unused")
@@ -40,7 +40,8 @@ public class JWTFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
 
         // El login del usuarios es publico
-        if ("/auth".equals(req.getRequestURI()) || HttpMethod.OPTIONS.matches(req.getMethod())) {
+        System.out.println(req.getRequestURI());
+        if ("/ttps-spring-clinicamascotas/auth".equals(req.getRequestURI()) || "/ttps-spring-clinicamascotas/usuario".equals(req.getRequestURI()) || HttpMethod.OPTIONS.matches(req.getMethod())) {
             chain.doFilter(request, response);
             return;
         }

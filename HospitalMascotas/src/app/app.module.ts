@@ -8,16 +8,19 @@ import { HomeComponent } from './componentes/home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { RegistroService } from './servicios/registro.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './componentes/login/login.component';
 import { NavComponent } from './componentes/nav/nav.component';
 import { BoardComponent } from './componentes/board/board.component';
+import { TokenInterceptorService } from './servicios/token-interceptor.service';
+import { LoginService } from './servicios/login.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
   { path: 'index', component: HomeComponent },
-  { path: 'registro', component: RegistroComponent }
-//  { path: 'component-two', component: ComponentTwo }
+  { path: 'registro', component: RegistroComponent },
+  { path: 'board', component: BoardComponent }
+//{ path: 'component-two', component: ComponentTwo }
 ];
 
 @NgModule({
@@ -39,7 +42,11 @@ const appRoutes: Routes = [
       { enableTracing: true } //<--debugging purposes only
       )
   ],
-  providers: [RegistroService],
+  providers: [
+    RegistroService,
+    LoginService,
+    {provide:HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

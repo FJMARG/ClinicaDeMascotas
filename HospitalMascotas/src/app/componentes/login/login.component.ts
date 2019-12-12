@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/servicios/login.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +12,15 @@ import { LoginService } from 'src/app/servicios/login.service';
 export class LoginComponent implements OnInit {
 
   status:boolean;
-  msj:String='';
+  msj:string='';
 
-  constructor(private router: Router, private loginService) {
+  constructor(private router: Router, private loginService: LoginService) {
 
   }
   
   ngOnInit(){
     this.status=false;
+    this.logout();
   }
 
   setStatus(s:boolean){
@@ -30,11 +32,33 @@ export class LoginComponent implements OnInit {
       this.msj = "Formulario invalido.";
       return;
     }
-    if (!this.loginService.verificar(form.value.lemail, form.value.lpass)){
-      this.msj = "Email o contraseña incorrectos.";
-      return;
-    }
-    this.setStatus(true);
-    this.router.navigate(['/board']);
+    this.loginService.login(form.value.lemail, form.value.lpass).pipe(first())
+    .subscribe(
+        data => {
+            this.setStatus(true);
+            this.router.navigate(['/board']);
+        },
+        error => {
+            this.setStatus(false);
+            this.msj = 'Nombre de usuario o Contraseña incorrectas';
+        });
+     
   }
+
+  getTokenData(){
+    return this.loginService.currentUserValue;
+  }
+
+  getUserEmail(){
+    return this.getTokenData().getEmail();
+  }
+
+  getUserRol(){
+    return this.getTokenData().getRol();
+  }
+
+  logout(){
+    this.loginService.logout();
+  }
+
 }

@@ -37,8 +37,11 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 	@Override
 	public Usuario recuperar(String email) {
 		Query consulta= this.getEntityManager().createQuery("select e from " + getPersistentClass().getSimpleName()+" e where e.email = '"+email+"'");
-		Usuario entity = (Usuario)consulta.getSingleResult();
-		return entity;
+		if (!consulta.getResultList().isEmpty()) {
+			Usuario entity = (Usuario)consulta.getSingleResult();
+			return entity;
+		}
+		return null;
 	}
 
 	@Override
