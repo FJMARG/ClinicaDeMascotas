@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Mascota } from 'src/app/modelos/mascota';
 import { MascotasService } from 'src/app/servicios/mascotas-service';
+import { LocalStorageService } from 'src/app/servicios/local-storage.service';
 
 @Component({
   selector: 'app-board',
@@ -9,12 +10,22 @@ import { MascotasService } from 'src/app/servicios/mascotas-service';
 })
 export class BoardComponent implements OnInit {
 
-  mascotas: Mascota[];
+  mascotas:any;
 
-  constructor() { }
+  constructor(private mascotasService: MascotasService, private localStorage:LocalStorageService) { }
 
   ngOnInit() {
-    this.mascotas = MascotasService;
+    this.getMascotasDueno();
+  }
+
+  getMascotasDueno(){
+    let d = this.localStorage.getId();
+    let obs = this.mascotasService.getMascotasDueno(d);
+    obs.subscribe(mascotas => { // espera los datos en formato JSON
+        this.mascotas = mascotas;
+      });
+    console.log(this.mascotas);
+    return this.mascotas;
   }
 
 }

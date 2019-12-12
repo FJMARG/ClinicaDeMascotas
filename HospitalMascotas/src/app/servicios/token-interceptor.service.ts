@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpClient, HttpHandler, HttpRequest } from '@angular/common/http';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,15 +9,16 @@ import { HttpInterceptor, HttpClient, HttpHandler, HttpRequest } from '@angular/
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
   
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService){
   
   }
   
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     console.log(`TokenInterceptorService - ${req.url}`);
+    let token =this.localStorageService.getToken();
     let authReq: HttpRequest<any> = req.clone({
       setHeaders:{
-        Authorization : `Bearer ${localStorage.getItem("token")}`
+        Authorization : `Bearer ${token}`
       }
     });
     return next.handle(authReq);

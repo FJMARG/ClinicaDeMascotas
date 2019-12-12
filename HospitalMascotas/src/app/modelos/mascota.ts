@@ -8,23 +8,23 @@ export class Mascota {
     private raza: string;
     private sexo: CharacterData;
     private color: string;
-    private señas: string;
+    private senas: string;
     private foto: string;
-    private dueño: Usuario;
+    private dueno: Usuario;
     private veterinario: Usuario;
     private visitas: string;
 
     
-    constructor (nombre: string, fechaNacimiento: string, especie: string, raza: string, sexo: CharacterData, color:string, señas: string, foto: string, dueño: Usuario, veterinario: Usuario){
+    constructor (nombre: string, fechaNacimiento: string, especie: string, raza: string, sexo: CharacterData, color:string, senas: string, foto: string, dueno: Usuario, veterinario: Usuario){
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.especie = especie;
         this.raza = raza;
         this.sexo = sexo;
         this.color = color;
-        this.señas = señas;
+        this.senas = senas;
         this.foto = foto;
-        this.dueño = dueño;
+        this.dueno = dueno;
         this.veterinario = veterinario;
         this.visitas = null;
     }
@@ -35,12 +35,21 @@ export class Mascota {
     public setVeterinario(value: Usuario) {
         this.veterinario = value;
     }
-    public getDueño(): Usuario {
-        return this.dueño;
+
+    public getVisitas(): string {
+        return this.visitas;
     }
 
-    public setDueño(value: Usuario) {
-        this.dueño = value;
+    public setVisitas(value: string) {
+        this.visitas = value;
+    }
+
+    public getDueno(): Usuario {
+        return this.dueno;
+    }
+
+    public setDueno(value: Usuario) {
+        this.dueno = value;
     }
     public getFoto(): string {
         return this.foto;
@@ -49,12 +58,12 @@ export class Mascota {
     public setFoto(value: string) {
         this.foto = value;
     }
-    public getSeñas(): string {
-        return this.señas;
+    public getSenas(): string {
+        return this.senas;
     }
 
-    public setSeñas(value: string) {
-        this.señas = value;
+    public setSenas(value: string) {
+        this.senas = value;
     }
     public getColor(): string {
         return this.color;

@@ -59,4 +59,8 @@ export class LocalStorageService {
     return exp;
   }
 
+  getCurrentUserData(){
+    let data = localStorage.getItem('currentUserData');
+    return data;
+  }
 }

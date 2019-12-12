@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Mascota } from '../modelos/mascota';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MascotasService {
 
-    idDueño: number;
-
     constructor(private http: HttpClient) {}
 
-    list(): Observable<any> {
-        let path = 'http://localhost:8080/ttps-spring-clinicamascotas/dueno/';
-        path.concat(this.idDueño.toString());
-        return this.http.get(path);
+    getMascotasDueno(d:number): Observable<any> {
+        let path = 'http://localhost:8080/ttps-spring-clinicamascotas/mascota/dueno/';
+        path = path+d.toString();
+        return this.http.get<Mascota>(path);
     }
 }

@@ -15,6 +15,7 @@ import { BoardComponent } from './componentes/board/board.component';
 import { TokenInterceptorService } from './servicios/token-interceptor.service';
 import { LoginService } from './servicios/login.service';
 import { LocalStorageService } from './servicios/local-storage.service';
+import { MascotasService } from './servicios/mascotas-service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
@@ -47,6 +48,7 @@ const appRoutes: Routes = [
     RegistroService,
     LoginService,
     LocalStorageService,
+    MascotasService,
     {provide:HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true}
   ],
   bootstrap: [AppComponent]

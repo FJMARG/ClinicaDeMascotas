@@ -10,7 +10,7 @@
       <div class="col-md-4">
         <h3>Nombre: {{ mascota.nombre }}</h3>
         <p>Sexo: {{ mascota.sexo }}</p>
-        <p>Fecha de Nacimiento: {{ mascota.fechaNac }}</p>
+        <p>Fecha de Nacimiento: {{ mascota.fechaNacimiento | date:"short" }}</p>
         <p>Veterinario: {{ mascota.veterinario }}</p>
       </div>
       <div class="col-md-4">
