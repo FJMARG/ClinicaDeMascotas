@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/servicios/login.service';
 import { first } from 'rxjs/operators';
+import { LocalStorageService } from 'src/app/servicios/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -11,20 +12,19 @@ import { first } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
 
-  status:boolean;
+  logged:boolean=false;
   msj:string='';
 
-  constructor(private router: Router, private loginService: LoginService) {
+  constructor(private router: Router, private loginService: LoginService, private localStorage:LocalStorageService) {
 
   }
   
   ngOnInit(){
-    this.status=false;
     this.logout();
   }
 
-  setStatus(s:boolean){
-    this.status=s;
+  setLogged(l:boolean){
+    this.logged=l;
   }
 
   login(form:NgForm){
@@ -35,26 +35,45 @@ export class LoginComponent implements OnInit {
     this.loginService.login(form.value.lemail, form.value.lpass).pipe(first())
     .subscribe(
         data => {
-            this.setStatus(true);
+            this.setLogged(true);
             this.router.navigate(['/board']);
         },
         error => {
-            this.setStatus(false);
+            this.setLogged(false);
             this.msj = 'Nombre de usuario o Contraseña incorrectas';
         });
      
   }
 
-  getTokenData(){
-    return this.loginService.currentUserValue;
+  getToken(){
+    if (!this.logged)
+      return;
+    return this.localStorage.getToken();
   }
 
-  getUserEmail(){
-    return this.getTokenData().getEmail();
+  getEmail(){
+    if (!this.logged)
+      return;
+    return this.localStorage.getEmail();
   }
 
-  getUserRol(){
-    return this.getTokenData().getRol();
+  getRol(){
+    console.log("Rol: "+this.localStorage.getRol());
+    if (!this.logged)
+      return;
+    return this.localStorage.getRol();
+  }
+
+  getId(){
+    if (!this.logged)
+      return;
+    return this.localStorage.getId();
+  }
+
+  getExp(){
+    if (!this.logged)
+      return;
+    return this.localStorage.getExp();
   }
 
   logout(){

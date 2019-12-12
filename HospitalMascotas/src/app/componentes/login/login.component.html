@@ -1,5 +1,9 @@
-<form #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login(loginForm)">
+<form #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login(loginForm)" *ngIf="!logged">
     <input class="form-control mr-sm-2" type="email" placeholder="Email" aria-label="Email" name="lemail" id="lemail" ngModel required>
     <input class="form-control mr-sm-2" type="password" placeholder="Contraseña" aria-label="Contraseña" name="lpass" id="lpass" ngModel required>
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
 </form>
+<div *ngIf="logged">
+    <span class="font-weight-bold text-center text-white"> {{this.getEmail()}} </span>
+    <button class="btn btn-outline-success my-2 my-sm-0">Cerrar Sesion</button>
+</div>

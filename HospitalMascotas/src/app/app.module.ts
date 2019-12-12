@@ -14,6 +14,7 @@ import { NavComponent } from './componentes/nav/nav.component';
 import { BoardComponent } from './componentes/board/board.component';
 import { TokenInterceptorService } from './servicios/token-interceptor.service';
 import { LoginService } from './servicios/login.service';
+import { LocalStorageService } from './servicios/local-storage.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
   providers: [
     RegistroService,
     LoginService,
+    LocalStorageService,
     {provide:HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true}
   ],
   bootstrap: [AppComponent]

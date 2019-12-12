@@ -1,9 +1,27 @@
 export class TokenData {
    
-    private email: string;
-    private rol: string;
-    private token?: string;
+    email: string;
+    rol: string;
+    id:number;
+    exp:number;
+    token?: string;
     
+    public getExp(): number {
+        return this.exp;
+    }
+
+    public setExp(value: number) {
+        this.exp = value;
+    }
+
+    public getId(): number {
+        return this.id;
+    }
+
+    public setId(value: number) {
+        this.id = value;
+    }
+
     public getEmail(): string {
         return this.email;
     }
