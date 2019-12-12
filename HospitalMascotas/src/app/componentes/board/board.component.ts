@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Mascota } from 'src/app/modelos/mascota';
+import { MascotasService } from 'src/app/servicios/mascotas-service';
 
 @Component({
   selector: 'app-board',
@@ -7,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
 
+  mascotas: Mascota[];
+
   constructor() { }
 
   ngOnInit() {
-
+    this.mascotas = MascotasService;
   }
 
 }
