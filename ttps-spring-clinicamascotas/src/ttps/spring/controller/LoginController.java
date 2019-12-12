@@ -29,8 +29,8 @@ public class LoginController {
     public ResponseEntity<?> authenticate(@RequestBody LoginFormData form) {
     	Usuario u = usuarioDAO.recuperar(form.getEmail());
         if(u != null && u.getPassword().equals(form.getPassword())) {
-            String token = tokenServices.generateToken(form.getEmail(), u.getRolUsuario(), EXPIRATION_IN_SEC);
-            return ResponseEntity.ok(new TokenData(token, EXPIRATION_IN_SEC, form.getEmail(),u.getRolUsuario()));
+            String token = tokenServices.generateToken(form.getEmail(), u.getRolUsuario(), u.getId(), EXPIRATION_IN_SEC);
+            return ResponseEntity.ok(new TokenData(token, EXPIRATION_IN_SEC, form.getEmail(),u.getRolUsuario(), u.getId()));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o password incorrecto");
         }

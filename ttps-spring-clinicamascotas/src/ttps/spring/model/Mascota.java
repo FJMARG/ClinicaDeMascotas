@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Component
 public class Mascota {
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private String nombre;
 	private Date fechaNacimiento;
@@ -25,12 +26,12 @@ public class Mascota {
 	private String raza;
 	private char sexo;
 	private String color;
-	private String señas;
+	private String senas;
 	private String foto;
 	@ManyToOne(optional = true)
-	@JoinColumn(name="id_dueño")
+	@JoinColumn(name="id_dueno")
 	@JsonIgnore
-	private Usuario dueño;
+	private Usuario dueno;
 	@ManyToOne(optional = true)
 	@JoinColumn(name="id_veterinario")
 	@JsonIgnore
@@ -81,11 +82,11 @@ public class Mascota {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public String getSeñas() {
-		return señas;
+	public String getSenas() {
+		return senas;
 	}
-	public void setSeñas(String señas) {
-		this.señas = señas;
+	public void setSenas(String senas) {
+		this.senas = senas;
 	}
 	public String getFoto() {
 		return foto;
@@ -93,11 +94,11 @@ public class Mascota {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	public Usuario getDueño() {
-		return dueño;
+	public Usuario getDueno() {
+		return dueno;
 	}
-	public void setDueño(Usuario dueño) {
-		this.dueño = dueño;
+	public void setDueno(Usuario dueno) {
+		this.dueno = dueno;
 	}
 	public Usuario getVeterinario() {
 		return veterinario;

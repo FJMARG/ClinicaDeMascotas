@@ -32,14 +32,14 @@ public class MascotaController {
 	// HashMap<Long,String> sessionTokens = new HashMap<Long,String>();
 	
 	@Transactional
-	@GetMapping("/dueno/{id_dueño}")
-	public ResponseEntity <List<Mascota>> listarMascotas(@PathVariable("id_dueño") long id_dueño) { //, @RequestHeader("token") String token) {
+	@GetMapping("/dueno/{id_dueno}")
+	public ResponseEntity <List<Mascota>> listarMascotas(@PathVariable("id_dueno") long id_dueno) { //, @RequestHeader("token") String token) {
 		/*Dictionary<String,String> dict_Usuario = new Hashtable<String,String>();
-		dict_Usuario.put("id_dueño", String.valueOf(id_dueño));
+		dict_Usuario.put("id_dueno", String.valueOf(id_dueno));
 		List<Mascota> mascotas = mDAO.recuperarMascotasPor(dict_Usuario);*/
-		if (!uDAO.existe(id_dueño))
+		if (!uDAO.existe(id_dueno))
 			return new ResponseEntity<List<Mascota>>(HttpStatus.NOT_FOUND);
-		Usuario u = uDAO.recuperar(id_dueño);
+		Usuario u = uDAO.recuperar(id_dueno);
 		List<Mascota> mascotas = u.getMascotas();
 		if (mascotas.isEmpty())
 			return new ResponseEntity<List<Mascota>>(HttpStatus.NO_CONTENT);
@@ -50,20 +50,20 @@ public class MascotaController {
 		return new ResponseEntity<List<Mascota>>(mascotas,HttpStatus.OK);
 	}
 	
-	@PostMapping("/agregar_mascota/{id_dueño}")
-	public ResponseEntity<Mascota> altaMascota(@RequestBody Mascota mascota, @PathVariable("id_dueño") long id_dueño) { //, @RequestHeader("token") String token) {
+	@PostMapping("/agregar_mascota/{id_dueno}")
+	public ResponseEntity<Mascota> altaMascota(@RequestBody Mascota mascota, @PathVariable("id_dueno") long id_dueno) { //, @RequestHeader("token") String token) {
 		
 		if (mDAO.existe(mascota.getId())) {
 			System.out.println("Ya existe una mascota con nombre " + mascota.getNombre());
 			return new ResponseEntity<Mascota> (HttpStatus.CONFLICT); //Código de respuesta 409
 		}
 		
-		if (!uDAO.existe(id_dueño)) {
-			System.out.println("No existe un usuario con id " + id_dueño);
+		if (!uDAO.existe(id_dueno)) {
+			System.out.println("No existe un usuario con id " + id_dueno);
 			return new ResponseEntity<Mascota> (HttpStatus.CONFLICT); //Código de respuesta 409
 		}
 		
-		mascota.setDueño(uDAO.recuperar(id_dueño));
+		mascota.setDueno(uDAO.recuperar(id_dueno));
 		mDAO.persistir(mascota);
 		return new ResponseEntity<Mascota> (mascota, HttpStatus.CREATED);
 	}

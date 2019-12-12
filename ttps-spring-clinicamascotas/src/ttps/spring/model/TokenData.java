@@ -8,15 +8,25 @@ public class TokenData {
 	    private int exp;
 	    private String email;
 	    private Rol rol;
+	    private long id;
+
+		public long getId() {
+			return id;
+		}
+
+		public void setId(long id) {
+			this.id = id;
+		}
 
 		public TokenData() {
 	    }
 
-	    public TokenData(String token, int exp, String email, Rol rol) {
+	    public TokenData(String token, int exp, String email, Rol rol, long id) {
 	        this.token = token;
 	        this.exp = exp;
 	        this.email = email;
 	        this.rol = rol;
+	        this.id = id;
 	    }
 
 	    public Rol getRol() {

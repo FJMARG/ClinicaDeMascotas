@@ -64,7 +64,7 @@ public class UsuarioController {
 		}
 		ConfigFichaPublica c = usuario.getFichaPublica();
 		fDAO.persistir(c);
-		if (usuario.getRolUsuario()!=Rol.DUEÑO){
+		if (usuario.getRolUsuario()!=Rol.DUENO){
 			Clinica cl = usuario.getClinica();
 			cDAO.persistir(cl);
 		}
@@ -82,7 +82,7 @@ public class UsuarioController {
 		"telefono":2221212121,
 		"email":"email@hotmail.com",
 		"password":1234,
-		"rolUsuario":"DUEÑO"
+		"rolUsuario":"DUENO"
 	}
 	 
 	 */

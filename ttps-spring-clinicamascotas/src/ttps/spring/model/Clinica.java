@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 public class Clinica {
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private String nombre;
 	private String direccion;

@@ -22,7 +22,7 @@ public class TestDBRelacionesTablas {
 		d.setTelefono("2212121212");
 		d.setEmail("dueño@asd.com");
 		d.setPassword("contrasena");
-		d.setRolUsuario(Rol.DUE�O);
+		d.setRolUsuario(Rol.DUENO);
 		UsuarioDAO uDAO = DaoFactory.getUsuarioDAO();
 		uDAO.persistir(d); // Creo y persisto un usuario dueño (sin mascotas).
 		
@@ -42,9 +42,9 @@ public class TestDBRelacionesTablas {
 		m.setRaza("Salchicha");
 		m.setSexo('M');
 		m.setColor("Verde Fosforescente");
-		m.setSe�as("Guiña el ojo");
+		m.setSenas("Guiña el ojo");
 		m.setFoto("/Dueño/pancho.jpg");
-		m.setDue�o(d); // Seteo el dueño anteriormente persistido.
+		m.setDueno(d); // Seteo el dueño anteriormente persistido.
 		m.setVeterinario(v); // Seteo el veterinario anteriormente persistido.
 		
 		Mascota m2 = new Mascota();
@@ -54,9 +54,9 @@ public class TestDBRelacionesTablas {
 		m2.setRaza("Golden");
 		m2.setSexo('M');
 		m2.setColor("Violeta Fosforescente");
-		m2.setSe�as("Se rasca");
+		m2.setSenas("Se rasca");
 		m2.setFoto("/Dueño/firulais.jpg");
-		m2.setDue�o(d); // Seteo el dueño anteriormente persistido.
+		m2.setDueno(d); // Seteo el dueño anteriormente persistido.
 		
 		MascotaDAO mDAO = DaoFactory.getMascotaDAO();
 		mDAO.persistir(m);

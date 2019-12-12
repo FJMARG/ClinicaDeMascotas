@@ -8,10 +8,10 @@ public class TestTablaConfigFichaPublica {
 	public static void main(String[] args) {
 		ConfigFichaPublicaDAO fDAO = DaoFactory.getConfigFichaPublicaDAO();
 		ConfigFichaPublica f = new ConfigFichaPublica();
-		f.setApellidoDueño(true);
-		f.setEmailDueño(true);
-		f.setNombreDueño(true);
-		f.setTelefonoDueño(true);
+		f.setApellidoDueno(true);
+		f.setEmailDueno(true);
+		f.setNombreDueno(true);
+		f.setTelefonoDueno(true);
 		f.setEspecieMascota(true);
 		f.setFotoMascota(true);
 		f.setColorMascota(true);
@@ -19,21 +19,21 @@ public class TestTablaConfigFichaPublica {
 		f.setFechaNacimientoMascota(true);
 		f.setNombreMascota(true);
 		f.setSexoMascota(true);
-		f.setSeñasMascota(true);
+		f.setSenasMascota(true);
 		fDAO.persistir(f); // Creo y persisto una ficha.
 		
 		ConfigFichaPublica dbFicha = fDAO.recuperar((long)1);
 		
 		System.out.println("Existe ficha: "+fDAO.existe(dbFicha.getId()));
 		
-		System.out.println("Valor de email dueÃ±o de Ficha que se persistio en la DB: "+dbFicha.isEmailDueño());
+		System.out.println("Valor de email dueÃ±o de Ficha que se persistio en la DB: "+dbFicha.isEmailDueno());
 		
-		dbFicha.setEmailDueño(false);
+		dbFicha.setEmailDueno(false);
 		fDAO.actualizar(dbFicha);
 		
 		dbFicha = fDAO.recuperar(dbFicha.getId());
 		
-		System.out.println("Valor de email dueÃ±o de Ficha que se actualizo en la DB: "+dbFicha.isEmailDueño());
+		System.out.println("Valor de email dueÃ±o de Ficha que se actualizo en la DB: "+dbFicha.isEmailDueno());
 	
 		System.out.println("Se va a eliminar la ficha: ");
 		

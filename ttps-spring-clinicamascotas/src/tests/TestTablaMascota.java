@@ -27,7 +27,7 @@ public class TestTablaMascota {
 		du.setTelefono("2212121212");
 		du.setEmail("dueño@asd.com");
 		du.setPassword("contrasena");
-		du.setRolUsuario(Rol.DUE�O);
+		du.setRolUsuario(Rol.DUENO);
 		UsuarioDAO uDAO = DaoFactory.getUsuarioDAO();
 		uDAO.persistir(du);
 		
@@ -44,9 +44,9 @@ public class TestTablaMascota {
 		m.setRaza("Salchicha");
 		m.setSexo('M');
 		m.setColor("Verde Fosforescente");
-		m.setSe�as("Guiña el ojo");
+		m.setSenas("Guiña el ojo");
 		m.setFoto("/Dueño/pancho.jpg");
-		m.setDue�o(uDAO.recuperar("dueño@asd.com"));
+		m.setDueno(uDAO.recuperar("dueño@asd.com"));
 		MascotaDAO mDAO = DaoFactory.getMascotaDAO();
 		mDAO.persistir(m);
 		

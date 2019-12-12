@@ -17,7 +17,7 @@ public class TestTablaVisita {
 		
 		/*
 		 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		 Esta parte no es parte de recordatorio, se va a instanciar un veterinario y una mascota(con dueño) ya que la visita debe tener un veterinario y una mascota.
+		 Esta parte no es parte de recordatorio, se va a instanciar un veterinario y una mascota(con dueno) ya que la visita debe tener un veterinario y una mascota.
 		 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		 */
 		
@@ -33,12 +33,12 @@ public class TestTablaVisita {
 		// No se setea clinica porque no es obligatorio en la base de datos.
 		
 		Usuario du = new Usuario();
-		du.setNombre("Dueño");
+		du.setNombre("Dueno");
 		du.setApellido("1");
 		du.setTelefono("2212121212");
-		du.setEmail("dueño@asd.com");
+		du.setEmail("dueno@asd.com");
 		du.setPassword("contrasena");
-		du.setRolUsuario(Rol.DUEÑO);
+		du.setRolUsuario(Rol.DUENO);
 		uDAO.persistir(du);
 		
 		Mascota m = new Mascota();
@@ -48,15 +48,15 @@ public class TestTablaVisita {
 		m.setRaza("Salchicha");
 		m.setSexo('M');
 		m.setColor("Verde Fosforescente");
-		m.setSeñas("Guiña el ojo");
-		m.setFoto("/Dueño/pancho.jpg");
-		m.setDueño(uDAO.recuperar("dueño@asd.com"));
+		m.setSenas("Guina el ojo");
+		m.setFoto("/Dueno/pancho.jpg");
+		m.setDueno(uDAO.recuperar("dueno@asd.com"));
 		MascotaDAO mDAO = DaoFactory.getMascotaDAO();
 		mDAO.persistir(m);
 		
 		/*
 		 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		 Fin instanciacion y persistencia de veterinario y mascota(con dueño). Se validara existencia de las mismas en DB en detalle, en su propio test.
+		 Fin instanciacion y persistencia de veterinario y mascota(con dueno). Se validara existencia de las mismas en DB en detalle, en su propio test.
 		 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		 */
 		

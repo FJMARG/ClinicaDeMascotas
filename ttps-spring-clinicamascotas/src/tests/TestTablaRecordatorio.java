@@ -26,7 +26,7 @@ public class TestTablaRecordatorio {
 		du.setTelefono("2212121212");
 		du.setEmail("dueÃ±o@asd.com");
 		du.setPassword("contrasena");
-		du.setRolUsuario(Rol.DUEÑO);
+		du.setRolUsuario(Rol.DUENO);
 		UsuarioDAO uDAO = DaoFactory.getUsuarioDAO();
 		uDAO.persistir(du);
 		
@@ -39,9 +39,9 @@ public class TestTablaRecordatorio {
 		m.setRaza("Salchicha");
 		m.setSexo('M');
 		m.setColor("Verde Fosforescente");
-		m.setSeñas("Guiña el ojo");
-		m.setFoto("/Dueño/pancho.jpg");
-		m.setDueño(uDAO.recuperar("dueÃ±o@asd.com"));
+		m.setSenas("Guina el ojo");
+		m.setFoto("/Dueno/pancho.jpg");
+		m.setDueno(uDAO.recuperar("dueÃ±o@asd.com"));
 		MascotaDAO mDAO = DaoFactory.getMascotaDAO();
 		mDAO.persistir(m);
 		

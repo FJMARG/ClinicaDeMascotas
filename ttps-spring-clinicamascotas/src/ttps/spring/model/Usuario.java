@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -18,7 +19,7 @@ import enums.Rol;
 @Entity
 @Component
 public class Usuario {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private String nombre;
 	private String apellido;
@@ -38,7 +39,7 @@ public class Usuario {
 	private List<Recordatorio> recordatorios;
 	@OneToOne
 	private ConfigFichaPublica fichaPublica;
-	@OneToMany(mappedBy = "dueño")
+	@OneToMany(mappedBy = "dueno")
 	@JsonIgnore
 	private List<Mascota> mascotas;
 	@OneToMany

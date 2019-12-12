@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 public class Recordatorio {
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private Date fecha;
 	private String descripcion;

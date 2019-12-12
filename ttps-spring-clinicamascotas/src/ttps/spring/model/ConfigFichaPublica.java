@@ -2,25 +2,26 @@ package ttps.spring.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 @Entity
 @Component
 public class ConfigFichaPublica {
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	private boolean nombreDueño;
-	private boolean apellidoDueño;
-	private boolean emailDueño;
-	private boolean telefonoDueño;
+	private boolean nombreDueno;
+	private boolean apellidoDueno;
+	private boolean emailDueno;
+	private boolean telefonoDueno;
 	private boolean nombreMascota;
 	private boolean fechaNacimientoMascota;
 	private boolean especieMascota;
 	private boolean razaMascota;
 	private boolean sexoMascota;
 	private boolean colorMascota;
-	private boolean señasMascota;
+	private boolean senasMascota;
 	private boolean fotoMascota;
 	public long getId() {
 		return id;
@@ -28,29 +29,29 @@ public class ConfigFichaPublica {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public boolean isNombreDueño() {
-		return nombreDueño;
+	public boolean isNombreDueno() {
+		return nombreDueno;
 	}
-	public void setNombreDueño(boolean nombreDueño) {
-		this.nombreDueño = nombreDueño;
+	public void setNombreDueno(boolean nombreDueno) {
+		this.nombreDueno = nombreDueno;
 	}
-	public boolean isApellidoDueño() {
-		return apellidoDueño;
+	public boolean isApellidoDueno() {
+		return apellidoDueno;
 	}
-	public void setApellidoDueño(boolean apellidoDueño) {
-		this.apellidoDueño = apellidoDueño;
+	public void setApellidoDueno(boolean apellidoDueno) {
+		this.apellidoDueno = apellidoDueno;
 	}
-	public boolean isEmailDueño() {
-		return emailDueño;
+	public boolean isEmailDueno() {
+		return emailDueno;
 	}
-	public void setEmailDueño(boolean emailDueño) {
-		this.emailDueño = emailDueño;
+	public void setEmailDueno(boolean emailDueno) {
+		this.emailDueno = emailDueno;
 	}
-	public boolean isTelefonoDueño() {
-		return telefonoDueño;
+	public boolean isTelefonoDueno() {
+		return telefonoDueno;
 	}
-	public void setTelefonoDueño(boolean telefonoDueño) {
-		this.telefonoDueño = telefonoDueño;
+	public void setTelefonoDueno(boolean telefonoDueno) {
+		this.telefonoDueno = telefonoDueno;
 	}
 	public boolean isNombreMascota() {
 		return nombreMascota;
@@ -88,11 +89,11 @@ public class ConfigFichaPublica {
 	public void setColorMascota(boolean colorMascota) {
 		this.colorMascota = colorMascota;
 	}
-	public boolean isSeñasMascota() {
-		return señasMascota;
+	public boolean isSenasMascota() {
+		return senasMascota;
 	}
-	public void setSeñasMascota(boolean señasMascota) {
-		this.señasMascota = señasMascota;
+	public void setSenasMascota(boolean senasMascota) {
+		this.senasMascota = senasMascota;
 	}
 	public boolean isFotoMascota() {
 		return fotoMascota;
