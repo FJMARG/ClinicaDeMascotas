@@ -10,11 +10,21 @@ import { LoginComponent } from '../login/login.component';
 export class NavComponent implements AfterViewInit {
 
   title = 'Clinica de Mascotas';
-  logged:boolean=true;
+  logged:boolean;
+  dueno:boolean;
+  vet:boolean;
+  admin:boolean;
 
-  @ViewChild(LoginComponent,{static: false}) login;
+  @ViewChild(LoginComponent,{static: false}) login: { status: boolean; };
+
 
   constructor() { }
+
+  ngOnInit(){
+    this.dueno = false;
+    this.vet = true;
+    this.admin = false;
+  }
 
   ngAfterViewInit(){
     this.logged = this.login.status;
