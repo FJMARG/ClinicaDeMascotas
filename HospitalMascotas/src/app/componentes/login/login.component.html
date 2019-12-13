@@ -5,5 +5,5 @@
 </form>
 <div *ngIf="logged">
     <span class="font-weight-bold text-center text-white"> {{this.getEmail()}} </span>
-    <button class="btn btn-outline-success my-2 my-sm-0">Cerrar Sesion</button>
+    <button class="btn btn-outline-success my-2 my-sm-0" (click)="logout()" >Cerrar Sesion</button>
 </div>

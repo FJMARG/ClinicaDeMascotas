@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit {
     this.loginService.logout();
     this.sesionService.setLogged(false);
     this.logged = this.sesionService.getLogged();
+    this.router.navigate(['/index']);
   }
 
 }
