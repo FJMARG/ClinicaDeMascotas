@@ -16,6 +16,7 @@ import { TokenInterceptorService } from './servicios/token-interceptor.service';
 import { LoginService } from './servicios/login.service';
 import { LocalStorageService } from './servicios/local-storage.service';
 import { MascotasService } from './servicios/mascotas-service';
+import { SessionService } from './servicios/session.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
     LoginService,
     LocalStorageService,
     MascotasService,
+    SessionService,
     {provide:HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true}
   ],
   bootstrap: [AppComponent]

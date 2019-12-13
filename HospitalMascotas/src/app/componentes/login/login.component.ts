@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/servicios/login.service';
 import { first } from 'rxjs/operators';
 import { LocalStorageService } from 'src/app/servicios/local-storage.service';
+import { SessionService } from 'src/app/servicios/session.service';
 
 @Component({
   selector: 'app-login',
@@ -12,19 +13,14 @@ import { LocalStorageService } from 'src/app/servicios/local-storage.service';
 })
 export class LoginComponent implements OnInit {
 
-  logged:boolean=false;
   msj:string='';
+  logged:boolean=this.sesionService.getLogged();
 
-  constructor(private router: Router, private loginService: LoginService, private localStorage:LocalStorageService) {
+  constructor(private router: Router, private loginService: LoginService, private localStorage:LocalStorageService, private sesionService: SessionService) {
 
   }
   
   ngOnInit(){
-    this.logout();
-  }
-
-  setLogged(l:boolean){
-    this.logged=l;
   }
 
   login(form:NgForm){
@@ -35,49 +31,52 @@ export class LoginComponent implements OnInit {
     this.loginService.login(form.value.lemail, form.value.lpass).pipe(first())
     .subscribe(
         data => {
-            this.setLogged(true);
+            this.sesionService.setLogged(true);
+            this.logged = this.sesionService.getLogged();
             this.router.navigate(['/board']);
         },
         error => {
-            this.setLogged(false);
+            this.sesionService.setLogged(false);
+            this.logged = this.sesionService.getLogged();
             this.msj = 'Nombre de usuario o Contraseña incorrectas';
         });
-     
   }
 
   getToken(){
-    if (!this.logged)
+    if (!this.sesionService.getLogged())
       return;
     return this.localStorage.getToken();
   }
 
   getEmail(){
-    if (!this.logged)
+    if (!this.sesionService.getLogged())
       return;
     return this.localStorage.getEmail();
   }
 
   getRol(){
     console.log("Rol: "+this.localStorage.getRol());
-    if (!this.logged)
+    if (!this.sesionService.getLogged())
       return;
     return this.localStorage.getRol();
   }
 
   getId(){
-    if (!this.logged)
+    if (!this.sesionService.getLogged())
       return;
     return this.localStorage.getId();
   }
 
   getExp(){
-    if (!this.logged)
+    if (!this.sesionService.getLogged())
       return;
     return this.localStorage.getExp();
   }
 
   logout(){
     this.loginService.logout();
+    this.sesionService.setLogged(false);
+    this.logged = this.sesionService.getLogged();
   }
 
 }

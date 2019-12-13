@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Mascota } from 'src/app/modelos/mascota';
+import { Router } from '@angular/router';
 import { MascotasService } from 'src/app/servicios/mascotas-service';
 import { LocalStorageService } from 'src/app/servicios/local-storage.service';
+import { SessionService } from 'src/app/servicios/session.service';
 
 @Component({
   selector: 'app-board',
@@ -12,10 +13,10 @@ export class BoardComponent implements OnInit {
 
   mascotas:any;
 
-  constructor(private mascotasService: MascotasService, private localStorage:LocalStorageService) { }
+  constructor(private router: Router,private mascotasService: MascotasService, private localStorage:LocalStorageService, private sesionService:SessionService) { }
 
   ngOnInit() {
-    this.getMascotasDueno();
+
   }
 
   getMascotasDueno(){
@@ -26,6 +27,15 @@ export class BoardComponent implements OnInit {
       });
     console.log(this.mascotas);
     return this.mascotas;
+  }
+
+  getLogged(){
+    return this.sesionService.getLogged();
+  }
+
+  redirect(){
+    if (!this.getLogged())
+      this.router.navigate(['/index']);
   }
 
 }
