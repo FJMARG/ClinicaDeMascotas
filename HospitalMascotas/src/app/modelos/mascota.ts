@@ -15,8 +15,8 @@ export class Mascota {
     private visitas: string;
 
     
-    constructor (nombre: string, fechaNacimiento: string, especie: string, raza: string, sexo: CharacterData, color:string, senas: string, foto: string, dueno: Usuario, veterinario: Usuario){
-        this.nombre = nombre;
+    constructor (/*nombre: string, fechaNacimiento: string, especie: string, raza: string, sexo: CharacterData, color:string, senas: string, foto: string, dueno: Usuario, veterinario: Usuario*/){
+        /*this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.especie = especie;
         this.raza = raza;
@@ -25,7 +25,7 @@ export class Mascota {
         this.senas = senas;
         this.foto = foto;
         this.dueno = dueno;
-        this.veterinario = veterinario;
+        this.veterinario = veterinario;*/
         this.visitas = null;
     }
     public getVeterinario(): Usuario {

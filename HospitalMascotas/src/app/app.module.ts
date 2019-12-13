@@ -19,6 +19,7 @@ import { MascotasService } from './servicios/mascotas-service';
 import { SessionService } from './servicios/session.service';
 import { EditarPerfilComponent } from './componentes/editar-perfil/editar-perfil.component';
 import { UsuarioService } from './servicios/usuario.service';
+import { RegistroMascotaComponent } from './componentes/registro-mascota/registro-mascota.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
@@ -36,7 +37,11 @@ const appRoutes: Routes = [
     LoginComponent,
     NavComponent,
     BoardComponent,
+<<<<<<< HEAD
     EditarPerfilComponent
+=======
+    RegistroMascotaComponent
+>>>>>>> 625050b484161b51f4b64b62b05804cee009b755
   ],
   imports: [
     BrowserModule,
