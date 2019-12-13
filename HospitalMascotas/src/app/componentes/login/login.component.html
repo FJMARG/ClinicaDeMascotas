@@ -4,6 +4,16 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
 </form>
 <div *ngIf="logged">
-    <span class="font-weight-bold text-center text-white"> {{this.getEmail()}} </span>
-    <button class="btn btn-outline-success my-2 my-sm-0" (click)="logout()" >Cerrar Sesion</button>
+    <div class="navbar navbar-expand-md collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown"> 
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">{{this.getEmail()}}</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="/editprofile">Editar Perfil</a>
+                </div>
+            </li>
+        </ul>
+        <button class="btn btn-outline-success my-2 my-sm-0" (click)="logout()" >Cerrar Sesion</button>
+    </div>
 </div>

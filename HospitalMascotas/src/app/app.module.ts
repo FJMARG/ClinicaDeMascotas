@@ -17,13 +17,15 @@ import { LoginService } from './servicios/login.service';
 import { LocalStorageService } from './servicios/local-storage.service';
 import { MascotasService } from './servicios/mascotas-service';
 import { SessionService } from './servicios/session.service';
+import { EditarPerfilComponent } from './componentes/editar-perfil/editar-perfil.component';
+import { UsuarioService } from './servicios/usuario.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
   { path: 'index', component: HomeComponent },
   { path: 'registro', component: RegistroComponent },
-  { path: 'board', component: BoardComponent }
-//{ path: 'component-two', component: ComponentTwo }
+  { path: 'board', component: BoardComponent },
+  { path: 'editprofile', component: EditarPerfilComponent }
 ];
 
 @NgModule({
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
     RegistroComponent,
     LoginComponent,
     NavComponent,
-    BoardComponent
+    BoardComponent,
+    EditarPerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,7 @@ const appRoutes: Routes = [
     LocalStorageService,
     MascotasService,
     SessionService,
+    UsuarioService,
     {provide:HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true}
   ],
   bootstrap: [AppComponent]

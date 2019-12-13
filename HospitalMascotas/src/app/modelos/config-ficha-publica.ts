@@ -1,32 +1,32 @@
 export class ConfigFichaPublica {
 
-    private nombreDueño: boolean;
-    public getNombreDueño(): boolean {
-        return this.nombreDueño;
+    private nombreDueno: boolean;
+    public getNombreDueno(): boolean {
+        return this.nombreDueno;
     }
-    public setNombreDueño(value: boolean) {
-        this.nombreDueño = value;
+    public setNombreDueno(value: boolean) {
+        this.nombreDueno = value;
     }
-	private apellidoDueño: boolean;
-    public getApellidoDueño(): boolean {
-        return this.apellidoDueño;
+	private apellidoDueno: boolean;
+    public getApellidoDueno(): boolean {
+        return this.apellidoDueno;
     }
-    public setApellidoDueño(value: boolean) {
-        this.apellidoDueño = value;
+    public setApellidoDueno(value: boolean) {
+        this.apellidoDueno = value;
     }
-	private emailDueño: boolean;
-    public getEmailDueño(): boolean {
-        return this.emailDueño;
+	private emailDueno: boolean;
+    public getEmailDueno(): boolean {
+        return this.emailDueno;
     }
-    public setEmailDueño(value: boolean) {
-        this.emailDueño = value;
+    public setEmailDueno(value: boolean) {
+        this.emailDueno = value;
     }
-	private telefonoDueño: boolean;
-    public getTelefonoDueño(): boolean {
-        return this.telefonoDueño;
+	private telefonoDueno: boolean;
+    public getTelefonoDueno(): boolean {
+        return this.telefonoDueno;
     }
-    public setTelefonoDueño(value: boolean) {
-        this.telefonoDueño = value;
+    public setTelefonoDueno(value: boolean) {
+        this.telefonoDueno = value;
     }
 	private nombreMascota: boolean;
     public getNombreMascota(): boolean {
@@ -70,12 +70,12 @@ export class ConfigFichaPublica {
     public setColorMascota(value: boolean) {
         this.colorMascota = value;
     }
-	private señasMascota: boolean;
-    public getSeñasMascota(): boolean {
-        return this.señasMascota;
+	private senasMascota: boolean;
+    public getSenasMascota(): boolean {
+        return this.senasMascota;
     }
-    public setSeñasMascota(value: boolean) {
-        this.señasMascota = value;
+    public setSenasMascota(value: boolean) {
+        this.senasMascota = value;
     }
     private fotoMascota: boolean;
     public getFotoMascota(): boolean {
