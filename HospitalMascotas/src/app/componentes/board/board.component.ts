@@ -1,7 +1,9 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MascotasService } from 'src/app/servicios/mascotas-service';
 import { LocalStorageService } from 'src/app/servicios/local-storage.service';
 import { SessionService } from 'src/app/servicios/session.service';
+import { observable } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -12,23 +14,20 @@ export class BoardComponent implements OnInit {
 
   mascotas:any;
 
-  constructor(private mascotasService: MascotasService, private localStorage:LocalStorageService, private sesionService:SessionService) { }
+  constructor(private router: Router,private mascotasService: MascotasService, private localStorage:LocalStorageService, private sesionService:SessionService) { }
 
   ngOnInit() {
     this.getMascotasDueno();
-    this.redirect();
   }
 
   getMascotasDueno(){
     let d = this.localStorage.getId();
-    if(d){  
-      let obs = this.mascotasService.getMascotasDueno(d);
-      obs.subscribe(mas => {
-        this.mascotas = mas;
-      }); 
-      return this.mascotas;
-    }
-    return null;
+    let obs = this.mascotasService.getMascotasDueno(d);
+    obs.subscribe(mascotas => { // espera los datos en formato JSON
+        this.mascotas = mascotas;
+      });;
+    console.log(this.mascotas);
+    return this.mascotas;
   }
 
   getLogged(){
@@ -36,7 +35,10 @@ export class BoardComponent implements OnInit {
   }
 
   redirect(){
-    this.sesionService.redirectTo("/index");  
+    let status = this.getLogged();
+    console.log("Loggeeeeeed: "+status);
+    if (!status)
+      this.router.navigate(['/index']);
   }
 
 }

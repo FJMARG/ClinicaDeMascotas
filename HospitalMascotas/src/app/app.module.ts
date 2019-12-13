@@ -17,8 +17,6 @@ import { LoginService } from './servicios/login.service';
 import { LocalStorageService } from './servicios/local-storage.service';
 import { MascotasService } from './servicios/mascotas-service';
 import { SessionService } from './servicios/session.service';
-import { EditarPerfilComponent } from './componentes/editar-perfil/editar-perfil.component';
-import { UsuarioService } from './servicios/usuario.service';
 import { RegistroMascotaComponent } from './componentes/registro-mascota/registro-mascota.component';
 
 const appRoutes: Routes = [
@@ -26,7 +24,8 @@ const appRoutes: Routes = [
   { path: 'index', component: HomeComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'board', component: BoardComponent },
-  { path: 'editprofile', component: EditarPerfilComponent }
+  { path: 'agregarmascota', component: RegistroMascotaComponent }
+//{ path: 'component-two', component: ComponentTwo }
 ];
 
 @NgModule({
@@ -37,7 +36,6 @@ const appRoutes: Routes = [
     LoginComponent,
     NavComponent,
     BoardComponent,
-    EditarPerfilComponent,
     RegistroMascotaComponent
   ],
   imports: [
@@ -56,7 +54,6 @@ const appRoutes: Routes = [
     LocalStorageService,
     MascotasService,
     SessionService,
-    UsuarioService,
     {provide:HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true}
   ],
   bootstrap: [AppComponent]

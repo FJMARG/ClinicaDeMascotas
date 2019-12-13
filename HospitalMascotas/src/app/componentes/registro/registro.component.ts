@@ -12,7 +12,8 @@ import { ConfigFichaPublica } from 'src/app/modelos/config-ficha-publica';
 })
 export class RegistroComponent implements OnInit {
   
-  selected:string='DUENO';
+  selected:string='DUEÑO';
+  hola:string='';
   status:string;
   classstatus:string;
   
@@ -64,35 +65,19 @@ export class RegistroComponent implements OnInit {
       u.setPassword(form.value.password);
       u.setTelefono(form.value.telefono);
       let ficha= new ConfigFichaPublica();
-      ficha.setNombreDueno(false);
+      ficha.setNombreDueño(false);
       ficha.setNombreMascota(false);
       ficha.setFechaNacimientoMascota(false);
       ficha.setEspecieMascota(false);
       ficha.setRazaMascota(false);
       ficha.setSexoMascota(false);
       ficha.setColorMascota(false);
-      ficha.setSenasMascota(false);
+      ficha.setSeñasMascota(false);
       ficha.setFotoMascota(false);
-      if (form.value.publicApe){
-        ficha.setApellidoDueno(true);
-      }
-      else{
-        ficha.setApellidoDueno(false);
-      }
-      if(form.value.publicEmail){
-        ficha.setEmailDueno(true);
-      }
-      else{
-        ficha.setEmailDueno(false);
-      }
-      if (form.value.publicTel){
-        ficha.setTelefonoDueno(true);
-      }
-      else{
-        ficha.setTelefonoDueno(false);
-      }
+      ficha.setApellidoDueño(form.value.publicApe);
+      ficha.setEmailDueño(form.value.publicEmail);
+      ficha.setTelefonoDueño(form.value.publicTel);
       u.setFichaPublica(ficha);
-      console.log("Ficha en registro component: "+u.getFichaPublica().getEmailDueno());
       this.registroService.crearUsuario(u).subscribe(user=>u);
       this.status='Registro satisfactorio.';
       this.classstatus='alert-success'; 
