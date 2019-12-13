@@ -37,11 +37,8 @@ const appRoutes: Routes = [
     LoginComponent,
     NavComponent,
     BoardComponent,
-<<<<<<< HEAD
-    EditarPerfilComponent
-=======
+    EditarPerfilComponent,
     RegistroMascotaComponent
->>>>>>> 625050b484161b51f4b64b62b05804cee009b755
   ],
   imports: [
     BrowserModule,

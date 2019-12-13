@@ -11,8 +11,7 @@ export class MascotasService {
     constructor(private http: HttpClient) {}
 
     getMascotasDueno(d:number): Observable<any> {
-        let path = 'http://localhost:8080/ttps-spring-clinicamascotas/mascota/dueno/';
-        path = path+d.toString();
-        return this.http.get<Mascota>(path);
+        let path = 'http://localhost:8080/ttps-spring-clinicamascotas/mascota/dueno/'+d.toString();
+        return this.http.get<any>(path);
     }
 }
