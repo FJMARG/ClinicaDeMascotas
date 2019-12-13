@@ -1,10 +1,8 @@
 package ttps.spring.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,8 +32,6 @@ public class UsuarioController {
 	@Autowired
 	ClinicaDAO cDAO;
 	
-	HashMap<Long,String> sessionTokens= new HashMap<Long, String>();
-	
 	@GetMapping
 	public ResponseEntity <List<Usuario>> listarUsuarios(){
 		List<Usuario> usuarios = uDAO.recuperarTodos(null);
@@ -46,14 +41,11 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity <Usuario> getUsuario(@PathVariable("id") long id, @RequestHeader("token") String token) {
+	public ResponseEntity <Usuario> getUsuario(@PathVariable("id") long id) {
 		Usuario u = uDAO.recuperar(id);
 		if (u == null) {
 			return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
 		}
-		
-		if (!sessionTokens.get(u.getId()).equals(token))
-			return new ResponseEntity<Usuario>(HttpStatus.UNAUTHORIZED);
 		return new ResponseEntity<Usuario>(u, HttpStatus.OK);
 	}
 	
@@ -63,6 +55,7 @@ public class UsuarioController {
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT); //Código de respuesta 409
 		}
 		ConfigFichaPublica c = usuario.getFichaPublica();
+		System.out.println(c.isEmailDueno());
 		fDAO.persistir(c);
 		if (usuario.getRolUsuario()!=Rol.DUENO){
 			Clinica cl = usuario.getClinica();
@@ -87,7 +80,7 @@ public class UsuarioController {
 	 
 	 */
 	
-	@RequestMapping("/autenticacion")
+	/*@RequestMapping("/autenticacion")
 	@PostMapping
 	public ResponseEntity <Void> autenticar(@RequestHeader("usuario") String email, @RequestHeader("clave") String password) {
 		if (!uDAO.existe(email)) {
@@ -102,7 +95,7 @@ public class UsuarioController {
 		sessionTokens.put(dbUsuario.getId(), tmp);
 	    responseHeaders.set("token", tmp);
 		return new ResponseEntity<Void>(responseHeaders,HttpStatus.NO_CONTENT); //Código de respuesta 204
-	}
+	}*/
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Usuario> actualizarUsuario(@PathVariable("id") long id, @RequestBody Usuario usuario) {
@@ -116,6 +109,19 @@ public class UsuarioController {
 		usuarioActual.setPassword(usuario.getPassword());
 		usuarioActual.setTelefono(usuario.getTelefono());
 		usuarioActual.setRolUsuario(usuario.getRolUsuario());
+		ConfigFichaPublica cActual = usuarioActual.getFichaPublica();
+		ConfigFichaPublica c = usuario.getFichaPublica();
+		cActual.setApellidoDueno(c.isApellidoDueno());
+		cActual.setEmailDueno(c.isEmailDueno());
+		cActual.setTelefonoDueno(c.isTelefonoDueno());
+		fDAO.actualizar(cActual);
+		if (usuarioActual.getRolUsuario()!=Rol.DUENO){
+			Clinica clActual = usuarioActual.getClinica();
+			Clinica cl = usuario.getClinica();
+			clActual.setNombre(cl.getNombre());
+			clActual.setDireccion(cl.getDireccion());
+			cDAO.actualizar(clActual);
+		}
 		uDAO.actualizar(usuarioActual);
 		return new ResponseEntity<Usuario>(usuarioActual, HttpStatus.OK);
 	}
