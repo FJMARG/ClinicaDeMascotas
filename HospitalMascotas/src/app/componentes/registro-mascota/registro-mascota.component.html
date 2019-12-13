@@ -1,0 +1,128 @@
+<div class="container _padding-top">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="offset-md-3 col-md-6 offset-md-3">
+            <form #registroForm="ngForm" (ngSubmit)="onSubmit(registroMascotaForm)" class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="veterinario" class="cols-sm-2 control-label">Veterinario</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <select [(ngModel)]="selected" class="form-control" name="veterinario" id="veterinario" *ngFor="let veterinario of veterinarios">
+                                        <option value="{{ veterinario.nombre }}">{{ veterinario.nombre }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">Nombre*</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="nombre" id="nombre"ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="sexo" class="cols-sm-2 control-label">Sexo*</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="sexo" id="sexo" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="fechaNacimiento" class="cols-sm-2 control-label">Fecha de Nacimiento*</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="fechaNacimiento" id="fechaNacimiento" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="especie" class="cols-sm-2 control-label">Especie*</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="especie" id="especie" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="raza" class="cols-sm-2 control-label">Raza*</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="raza" id="raza" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="raza" class="cols-sm-2 control-label">Color</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="color" id="color" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="senas" class="cols-sm-2 control-label">Señas Particulares</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="senas" id="senas" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="foto" class="cols-sm-2 control-label">Foto</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="file" class="form-control" name="foto" id="foto" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Crear</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <button type="reset" class="btn btn-secondary btn-lg btn-block">Vaciar Campos</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>* Estos campos no se pueden modificar luego de creada la mascota</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> <!-- /container -->

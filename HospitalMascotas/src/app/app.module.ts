@@ -17,6 +17,7 @@ import { LoginService } from './servicios/login.service';
 import { LocalStorageService } from './servicios/local-storage.service';
 import { MascotasService } from './servicios/mascotas-service';
 import { SessionService } from './servicios/session.service';
+import { RegistroMascotaComponent } from './componentes/registro-mascota/registro-mascota.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
     RegistroComponent,
     LoginComponent,
     NavComponent,
-    BoardComponent
+    BoardComponent,
+    RegistroMascotaComponent
   ],
   imports: [
     BrowserModule,
