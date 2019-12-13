@@ -34,7 +34,9 @@ export class BoardComponent implements OnInit {
   }
 
   redirect(){
-    if (!this.getLogged())
+    let status = this.getLogged();
+    console.log("Loggeeeeeed: "+status);
+    if (!status)
       this.router.navigate(['/index']);
   }
 

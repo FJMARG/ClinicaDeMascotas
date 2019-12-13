@@ -31,12 +31,10 @@ export class LoginComponent implements OnInit {
     this.loginService.login(form.value.lemail, form.value.lpass).pipe(first())
     .subscribe(
         data => {
-            this.sesionService.setLogged(true);
             this.logged = this.sesionService.getLogged();
             this.router.navigate(['/board']);
         },
         error => {
-            this.sesionService.setLogged(false);
             this.logged = this.sesionService.getLogged();
             this.msj = 'Nombre de usuario o Contraseña incorrectas';
         });
@@ -75,7 +73,6 @@ export class LoginComponent implements OnInit {
 
   logout(){
     this.loginService.logout();
-    this.sesionService.setLogged(false);
     this.logged = this.sesionService.getLogged();
     this.router.navigate(['/index']);
   }

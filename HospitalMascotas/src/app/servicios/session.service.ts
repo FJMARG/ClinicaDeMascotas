@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
-  public logged:boolean;
 
-  constructor() { 
-  	this.logged = false;
-  }
+  constructor(private ls: LocalStorageService){
 
-  setLogged(status:boolean) {
-    this.logged=status;
   }
 
   getLogged(){
-    return this.logged;
+    let token = this.ls.getToken();
+    if (token){
+      let tokenSize = token.length;
+      let logged = tokenSize !=0;
+      return logged;
+    }
+    return false;
   }
 
 }

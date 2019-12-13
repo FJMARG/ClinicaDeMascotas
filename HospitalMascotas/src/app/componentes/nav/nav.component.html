@@ -7,17 +7,17 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <ul class="collapse navbar-collapse navbar-nav" *ngIf="!login.logged">
-                <li class="nav-item">
-                    <a class="nav-link" href="/index">Inicio<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/registro">Registro</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Acerca de Nosotros</a>
-                </li>
-            </ul>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/index">Inicio<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/registro">Registro</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Acerca de Nosotros</a>
+            </li>
+            
             <li class="nav-item dropdown" *ngIf="login.logged"> <!-- agregar var vet (&& vet) -->
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">Menú</a>
