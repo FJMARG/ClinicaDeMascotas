@@ -54,7 +54,15 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 	
 	@Override
 	public List<Usuario> recuperarVeterinariosValidos(String columnOrder){
-		Query consulta= this.getEntityManager().createQuery("select e from " + getPersistentClass().getSimpleName()+" e where e.rolUsuario = '"+Rol.VETERINARIO.name()+"' and  order by e."+columnOrder);
+		Query consulta= this.getEntityManager().createQuery("select e from " + getPersistentClass().getSimpleName()+" e where e.rolUsuario = '"+Rol.VETERINARIO.name()+"' and e.veterinarioValido = 1 order by e."+columnOrder);
+		@SuppressWarnings("unchecked")
+		List<Usuario> resultado = (List<Usuario>)consulta.getResultList();
+		return resultado;
+	}
+	
+	@Override
+	public List<Usuario> recuperarVeterinariosNoValidos(String columnOrder){
+		Query consulta= this.getEntityManager().createQuery("select e from " + getPersistentClass().getSimpleName()+" e where e.rolUsuario = '"+Rol.VETERINARIO.name()+"' and e.veterinarioValido = 0 order by e."+columnOrder);
 		@SuppressWarnings("unchecked")
 		List<Usuario> resultado = (List<Usuario>)consulta.getResultList();
 		return resultado;

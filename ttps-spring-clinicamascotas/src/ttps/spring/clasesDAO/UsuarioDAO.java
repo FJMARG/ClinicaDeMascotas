@@ -17,4 +17,6 @@ public interface UsuarioDAO extends GenericDAO<Usuario>{
 	
 	public List<Usuario> recuperarVeterinariosValidos(String columnOrder);
 
+	public List<Usuario> recuperarVeterinariosNoValidos(String columnOrder);
+
 }

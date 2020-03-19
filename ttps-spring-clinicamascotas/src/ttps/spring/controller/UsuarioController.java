@@ -40,6 +40,22 @@ public class UsuarioController {
 		return new ResponseEntity<List<Usuario>>(usuarios,HttpStatus.OK);
 	}
 	
+	@GetMapping("/rol/{rol}")
+	public ResponseEntity <List<Usuario>> listarUsuarios(@PathVariable("rol") Rol r){
+		List<Usuario> usuarios = uDAO.recuperarPorRol("apellido", r);
+		if (usuarios.isEmpty())
+			return new ResponseEntity<List<Usuario>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Usuario>>(usuarios,HttpStatus.OK);
+	}
+	
+	@GetMapping("/veterinariosNoValidos")
+	public ResponseEntity <List<Usuario>> listarVeterinariosSinValidar(){
+		List<Usuario> usuarios = uDAO.recuperarVeterinariosNoValidos("apellido");
+		if (usuarios.isEmpty())
+			return new ResponseEntity<List<Usuario>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Usuario>>(usuarios,HttpStatus.OK);
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity <Usuario> getUsuario(@PathVariable("id") long id) {
 		Usuario u = uDAO.recuperar(id);
