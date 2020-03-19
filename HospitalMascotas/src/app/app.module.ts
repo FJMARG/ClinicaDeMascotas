@@ -17,15 +17,20 @@ import { LoginService } from './servicios/login.service';
 import { LocalStorageService } from './servicios/local-storage.service';
 import { MascotasService } from './servicios/mascotas-service';
 import { SessionService } from './servicios/session.service';
+import { EditarPerfilComponent } from './componentes/editar-perfil/editar-perfil.component';
+import { UsuarioService } from './servicios/usuario.service';
 import { RegistroMascotaComponent } from './componentes/registro-mascota/registro-mascota.component';
+import { RegistroMascotaService } from './servicios/registro-mascotas-service';
+import { ValidarVeterinarioComponent } from './componentes/validar-veterinario/validar-veterinario.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
   { path: 'index', component: HomeComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'board', component: BoardComponent },
-  { path: 'agregarmascota', component: RegistroMascotaComponent }
-//{ path: 'component-two', component: ComponentTwo }
+  { path: 'editprofile', component: EditarPerfilComponent },
+  { path: 'agregarmascota', component: RegistroMascotaComponent },
+  { path: 'validarveterinarios', component: ValidarVeterinarioComponent },
 ];
 
 @NgModule({
@@ -36,7 +41,9 @@ const appRoutes: Routes = [
     LoginComponent,
     NavComponent,
     BoardComponent,
-    RegistroMascotaComponent
+    EditarPerfilComponent,
+    RegistroMascotaComponent,
+    ValidarVeterinarioComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +61,8 @@ const appRoutes: Routes = [
     LocalStorageService,
     MascotasService,
     SessionService,
+    UsuarioService,
+    RegistroMascotaService,
     {provide:HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true}
   ],
   bootstrap: [AppComponent]

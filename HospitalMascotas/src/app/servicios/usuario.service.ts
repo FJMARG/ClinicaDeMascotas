@@ -21,4 +21,14 @@ export class UsuarioService {
     return this.http.put<Usuario>(url, u).pipe(catchError((err: any) => {return Observable.of(u)}));
   }
 
+  getUsuariosRol(rol:string):Observable<any>{
+    let url = "http://localhost:8080/ttps-spring-clinicamascotas/usuario/rol/"+rol;
+    return this.http.get<any>(url);
+  }
+
+  getVeterinariosNoValidos():Observable<any>{
+    let url = "http://localhost:8080/ttps-spring-clinicamascotas/usuario/veterinariosNoValidos";
+    return this.http.get<any>(url);
+  }
+
 }

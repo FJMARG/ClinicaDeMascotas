@@ -6,6 +6,7 @@ import { RegistroService } from 'src/app/servicios/registro.service';
 import { LocalStorageService } from 'src/app/servicios/local-storage.service';
 import { RegistroMascotaService } from 'src/app/servicios/registro-mascotas-service';
 import { ConfigFichaPublica } from 'src/app/modelos/config-ficha-publica';
+import { SessionService } from 'src/app/servicios/session.service';
 
 @Component({
   selector: 'app-registro-mascota',
@@ -29,9 +30,10 @@ export class RegistroMascotaComponent implements OnInit {
     nombre: ''
   }*/
 
-  constructor(private registroService: RegistroService, private RegistroMascotaService: RegistroMascotaService, private localStorage:LocalStorageService) { }
+  constructor(private registroService: RegistroService, private registroMascotaService: RegistroMascotaService, private localStorage:LocalStorageService, private sesion:SessionService) { }
 
   ngOnInit() {
+    this.sesion.redirectTo("/index");
     /*const request = {
       ...this.formValue,
       ...this.formValueVete
@@ -82,43 +84,36 @@ export class RegistroMascotaComponent implements OnInit {
     return null;
   }*/
 
-  validar(form:NgForm){
-    if (!form.valid) {
-      return false;
+  onSubmit(form:NgForm){
+    if (form.valid){
+      let m = new Mascota();
+      /*let veterinario = this.getVeterinario(form.value.veterinario);
+      m.setVeterinario(veterinario);
+      
+      if (u.getRolUsuario() == 'VETERINARIO'){
+        let clinica = new Clinica();
+        clinica.setNombre(form.value.consultorio);
+        clinica.setDireccion(form.value.consultorio);
+        u.setClinica(clinica);
+      }
+      else{
+        u.setClinica(null);
+      }*/
+      m.setVeterinario = null;
+      m.setNombre(form.value.nombre);
+      m.setSexo(form.value.sexo);
+      m.setFechaNacimiento(form.value.fechaNacimiento);
+      m.setEspecie(form.value.especie);
+      m.setRaza(form.value.raza);
+      m.setColor(form.value.color);
+      m.setSenas(form.value.senas);
+      m.setFoto(form.value.foto);
+      let d = this.localStorage.getId();
+      console.log("Id del dueño:"+d);
+      this.registroMascotaService.crearMascota(m, d).subscribe(mascota=>m);
+      this.status='La mascota fue registrada correctamente.';
+      this.classstatus='alert-success'; 
     }
-  }
-
-  onsubmit(form:NgForm){
-    if (this.validar(form)){
-    let m = new Mascota();
-    /*let veterinario = this.getVeterinario(form.value.veterinario);
-    m.setVeterinario(veterinario);
-    
-    if (u.getRolUsuario() == 'VETERINARIO'){
-      let clinica = new Clinica();
-      clinica.setNombre(form.value.consultorio);
-      clinica.setDireccion(form.value.consultorio);
-      u.setClinica(clinica);
-    }
-    else{
-      u.setClinica(null);
-    }*/
-    m.setVeterinario = null;
-    m.setNombre(form.value.nombre);
-    m.setSexo(form.value.sexo);
-    m.setFechaNacimiento(form.value.fechaNacimiento);
-    m.setEspecie(form.value.especie);
-    m.setRaza(form.value.raza);
-    m.setColor(form.value.color);
-    m.setSenas(form.value.senas);
-    m.setFoto(form.value.foto);
-    let d = this.localStorage.getId();
-    this.RegistroMascotaService.crearMascota(m, d).subscribe(mascota=>m);
-    this.status='Registro satisfactorio.';
-    this.classstatus='alert-success'; 
-    return true;
-  }
-  return false;
 }
 
 }

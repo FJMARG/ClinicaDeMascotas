@@ -2,7 +2,8 @@
     <!-- Example row of columns -->
     <div class="row">
         <div class="offset-md-3 col-md-6 offset-md-3">
-            <form #registroForm="ngForm" (ngSubmit)="onSubmit(registroMascotaForm)" class="form-horizontal">
+            <div class="alert {{classstatus}}" role="alert">{{status}}</div>
+            <form #registroMascotaForm="ngForm" (ngSubmit)="onSubmit(registroMascotaForm)" class="form-horizontal">
                 <!--<div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -23,7 +24,7 @@
                             <label for="name" class="cols-sm-2 control-label">Nombre*</label>
                             <div class="cols-sm-10">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="nombre" id="nombre"ngModel/>
+                                    <input type="text" class="form-control" name="nombre" id="nombre" ngModel/>
                                 </div>
                             </div>
                         </div>

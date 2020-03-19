@@ -1,25 +1,14 @@
 <!-- Page Content -->
 <div class="container">
 
-    <!-- Listado Mascotas -->
-    <div class="row" *ngFor="let mascota of mascotas">
+    <!-- Listado Veterinarios -->
+    <ul>
+        <div class="row" *ngFor="let veterinario of veterinarios">
 
-      <div class="col-md-4">
-        <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/300x300" alt="">
-      </div>
-      <div class="col-md-4">
-        <h3>Nombre: {{ mascota.nombre }}</h3>
-        <p>Sexo: {{ mascota.sexo }}</p>
-        <p>Fecha de Nacimiento: {{ mascota.fechaNacimiento | date:"short" }}</p>
-        <p>Veterinario: {{ mascota.veterinario }}</p>
-      </div>
-      <div class="col-md-4">
-        <p>Especie: {{ mascota.especie }}</p>
-        <p>Raza: {{ mascota.raza }}</p>
-        <p>Color: {{ mascota.color }}</p>
-        <p>Señas particulares: {{ mascota.senas }}</p>
-      </div>
-    </div>
+            <li>{{ veterinario.apellido }}, {{ veterinario.nombre }}</li>
+        
+        </div>
+    </ul>
     <!-- /.row -->
     <hr>
 

@@ -14,14 +14,12 @@ export class RegistroMascotaService {
     constructor(private http: HttpClient) {}
 
     getDueno(dueno:number): Observable<any> {
-        let path = 'http://localhost:8080/ttps-spring-clinicamascotas/usuario/';
-        path = path+dueno.toString();
+        let path = 'http://localhost:8080/ttps-spring-clinicamascotas/usuario/'+dueno;
         return this.http.get<Usuario>(path);
     }
 
     crearMascota(mascota:Mascota, dueno:number):Observable<Mascota>{
-        let path = 'http://localhost:8080/ttps-spring-clinicamascotas/mascota/agregar_mascota/';
-        path = path+this.getDueno.toString();
+        let path = 'http://localhost:8080/ttps-spring-clinicamascotas/mascota/agregar_mascota/'+dueno;
         return this.http.post<Mascota>(path, mascota).pipe(catchError((err: any) => {return Observable.of(mascota)}));
     }
 

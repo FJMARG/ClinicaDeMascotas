@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
   }
 
   getRol(){
-    console.log("Rol: "+this.localStorage.getRol());
+    //console.log("Rol: "+this.localStorage.getRol());
     if (!this.sesionService.getLogged())
       return;
     return this.localStorage.getRol();
