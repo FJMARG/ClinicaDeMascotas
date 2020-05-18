@@ -1,7 +1,9 @@
 <!-- Page Content -->
-<div class="container">
-
+<div class="container _padding-top">
     <!-- Listado Mascotas -->
+    <div class="row">
+      <div class="alert alert-danger" role="alert" *ngIf="msj">{{ msj }}</div>
+    </div>
     <div class="row" *ngFor="let mascota of mascotas">
 
       <div class="col-md-4">
@@ -11,7 +13,7 @@
         <h3>Nombre: {{ mascota.nombre }}</h3>
         <p>Sexo: {{ mascota.sexo }}</p>
         <p>Fecha de Nacimiento: {{ mascota.fechaNacimiento | date:"short" }}</p>
-        <p>Veterinario: {{ mascota.veterinario }}</p>
+        <p *ngIf = "mascota.veterinario">Veterinario: {{ mascota.veterinario.apellido }}, {{ mascota.veterinario.nombre }}</p>
       </div>
       <div class="col-md-4">
         <p>Especie: {{ mascota.especie }}</p>

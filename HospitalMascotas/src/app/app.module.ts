@@ -22,6 +22,16 @@ import { UsuarioService } from './servicios/usuario.service';
 import { RegistroMascotaComponent } from './componentes/registro-mascota/registro-mascota.component';
 import { RegistroMascotaService } from './servicios/registro-mascotas-service';
 import { ValidarVeterinarioComponent } from './componentes/validar-veterinario/validar-veterinario.component';
+import { RecordatoriosComponent } from './componentes/recordatorios/recordatorios.component';
+import { AgregarRecordatorioComponent } from './componentes/agregar-recordatorio/agregar-recordatorio.component';
+import { EliminarMascotaComponent } from './componentes/eliminar-mascota/eliminar-mascota.component';
+import { GestionarMascotasComponent } from './componentes/gestionar-mascotas/gestionar-mascotas.component';
+import { EditarMascotaComponent } from './componentes/editar-mascota/editar-mascota.component';
+import { VisitasComponent } from './componentes/visitas/visitas.component';
+import { VisitaVeterinarioComponent } from './componentes/visita-veterinario/visita-veterinario.component';
+import { AsignarVeterinarioComponent } from './componentes/asignar-veterinario/asignar-veterinario.component';
+import { AsignarAMascotaComponent } from './componentes/asignar-amascota/asignar-amascota.component';
+import { AceptarmascotaComponent } from './componentes/aceptarmascota/aceptarmascota.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
@@ -31,6 +41,15 @@ const appRoutes: Routes = [
   { path: 'editprofile', component: EditarPerfilComponent },
   { path: 'agregarmascota', component: RegistroMascotaComponent },
   { path: 'validarveterinarios', component: ValidarVeterinarioComponent },
+  { path: 'listarrecordatorios', component: RecordatoriosComponent },
+  { path: 'agregarrecordatorio', component: AgregarRecordatorioComponent },
+  { path: 'gestionarmascotas', component: GestionarMascotasComponent },
+  { path: 'eliminarmascota/:id', component: EliminarMascotaComponent },
+  { path: 'editarmascota/:id', component: EditarMascotaComponent },
+  { path: 'altavisitaveterinario', component: VisitaVeterinarioComponent },
+  { path: 'asignarveterinario', component: AsignarVeterinarioComponent },
+  { path: 'asignaramascota/:id', component: AsignarAMascotaComponent },
+  { path: 'aceptarmascotas', component: AceptarmascotaComponent },
 ];
 
 @NgModule({
@@ -43,7 +62,17 @@ const appRoutes: Routes = [
     BoardComponent,
     EditarPerfilComponent,
     RegistroMascotaComponent,
-    ValidarVeterinarioComponent
+    ValidarVeterinarioComponent,
+    RecordatoriosComponent,
+    AgregarRecordatorioComponent,
+    EliminarMascotaComponent,
+    GestionarMascotasComponent,
+    EditarMascotaComponent,
+    VisitasComponent,
+    VisitaVeterinarioComponent,
+    AsignarVeterinarioComponent,
+    AsignarAMascotaComponent,
+    AceptarmascotaComponent
   ],
   imports: [
     BrowserModule,

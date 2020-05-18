@@ -1,0 +1,48 @@
+<div class="container _padding-top">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="offset-md-3 col-md-6 offset-md-3">
+            <div class="alert {{classstatus}}" role="alert">{{status}}</div>
+            <form #agregarRecordatorioForm="ngForm" (ngSubmit)="agregarRecordatorio(agregarRecordatorioForm)" class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="mascotaid" class="cols-sm-2 control-label">Mascota</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <select [(ngModel)]="selected" class="form-control" name="mascotaid" id="mascotaid">
+                                        <option *ngFor="let mascota of mascotas" value="{{ mascota.id }}">{{ mascota.nombre }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="descripcion" class="cols-sm-2 control-label">Descripcion</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <textarea class="form-control" name="descripcion" id="descripcion" ngModel></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Crear</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <button type="reset" class="btn btn-secondary btn-lg btn-block">Vaciar Campos</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> <!-- /container -->

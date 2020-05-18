@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import enums.Rol;
 import ttps.spring.clasesDAO.UsuarioDAO;
+import ttps.spring.model.Mascota;
+import ttps.spring.model.Recordatorio;
 import ttps.spring.model.Usuario;
 
 @Repository
@@ -67,5 +69,21 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 		List<Usuario> resultado = (List<Usuario>)consulta.getResultList();
 		return resultado;
 	}
+
+	@Override
+	public List<Recordatorio> recuperarRecordatoriosDe(long id) {
+		Query consulta= this.getEntityManager().createQuery("select e.recordatorios from " + getPersistentClass().getSimpleName()+" e where e.id = '"+id);
+		@SuppressWarnings("unchecked")
+		List<Recordatorio> resultado = (List<Recordatorio>)consulta.getResultList();
+		return resultado;
+	}
+	
+	//public List<Mascota> recuperarMascotasAsignadas(long id) {
+	//	Query consulta= this.getEntityManager().createQuery("select e.mascotasAsignadas from " + getPersistentClass().getSimpleName()+" e where e.id = '"+id);
+	//	@SuppressWarnings("unchecked")
+	//	List<Mascota> resultado = (List<Mascota>)consulta.getResultList();
+	//	return resultado;
+	//}
+	
 	
 }

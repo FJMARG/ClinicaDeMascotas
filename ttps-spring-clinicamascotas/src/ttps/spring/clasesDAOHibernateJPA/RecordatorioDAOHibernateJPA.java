@@ -1,5 +1,7 @@
 package ttps.spring.clasesDAOHibernateJPA;
 
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import ttps.spring.clasesDAO.RecordatorioDAO;
@@ -12,5 +14,5 @@ public class RecordatorioDAOHibernateJPA extends GenericDAOHibernateJPA<Recordat
 		super(Recordatorio.class);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 }

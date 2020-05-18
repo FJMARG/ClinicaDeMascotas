@@ -1,14 +1,17 @@
 <!-- Page Content -->
 <div class="container">
-
+  <div class="alert {{classstatus}}" role="alert">{{status}}</div>
     <!-- Listado Veterinarios -->
-    <ul>
-        <div class="row" *ngFor="let veterinario of veterinarios">
-
-            <li>{{ veterinario.apellido }}, {{ veterinario.nombre }}</li>
-        
-        </div>
-    </ul>
+    <div *ngIf="veterinarios">
+      <form #validarForm="ngForm" (ngSubmit)="validarVeterinarios(validarForm)" class="form-horizontal">
+        <ul>
+            <div class="row" *ngFor="let veterinario of veterinarios; let i = index;">
+                <li>{{ veterinario.apellido }}, {{ veterinario.nombre }} | <label for="validar" class="cols-sm-2 control-label">¿Validar? -> </label> <input type="checkbox" [(ngModel)]="veterinario.veterinarioValido" name= "validar" (change)="actualizar()"></li> 
+            </div>
+        </ul>
+        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Confirmar">
+      </form>
+    </div>
     <!-- /.row -->
     <hr>
 

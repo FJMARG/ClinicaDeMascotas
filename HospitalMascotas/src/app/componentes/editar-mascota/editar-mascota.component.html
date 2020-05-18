@@ -1,0 +1,43 @@
+<div class="container _padding-top">
+    <div class="row">
+        <div class="offset-md-3 col-md-6 offset-md-3">
+            <div class="alert {{classstatus}}" role="alert">{{status}}</div>
+            <form #editarMascotaForm="ngForm" (ngSubmit)="editarMascota(editarMascotaForm)" class="form-horizontal" *ngIf="mascota">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="raza" class="cols-sm-2 control-label">Color</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="color" id="color" [(ngModel)]="mascota.color"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="senas" class="cols-sm-2 control-label">Señas Particulares</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="senas" id="senas" [(ngModel)]="mascota.senas"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Editar</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <button type="reset" class="btn btn-secondary btn-lg btn-block">Vaciar Campos</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

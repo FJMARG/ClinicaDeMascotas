@@ -26,4 +26,8 @@ export class SessionService {
       this.router.navigate([endpoint]);
   }
 
+  forceRedirect(endpoint:string){
+    this.router.navigate([endpoint]);
+  }
+
 }

@@ -9,6 +9,7 @@ public class TokenData {
 	    private String email;
 	    private Rol rol;
 	    private long id;
+	    private boolean veterinarioValido;
 
 		public long getId() {
 			return id;
@@ -21,12 +22,13 @@ public class TokenData {
 		public TokenData() {
 	    }
 
-	    public TokenData(String token, int exp, String email, Rol rol, long id) {
+	    public TokenData(String token, int exp, String email, Rol rol, long id, boolean v) {
 	        this.token = token;
 	        this.exp = exp;
 	        this.email = email;
 	        this.rol = rol;
 	        this.id = id;
+	        this.setVeterinarioValido(v);
 	    }
 
 	    public Rol getRol() {
@@ -60,5 +62,13 @@ public class TokenData {
 	    public void setEmail(String email) {
 	        this.email = email;
 	    }
+
+		public boolean isVeterinarioValido() {
+			return veterinarioValido;
+		}
+
+		public void setVeterinarioValido(boolean veterinarioValido) {
+			this.veterinarioValido = veterinarioValido;
+		}
 }
 

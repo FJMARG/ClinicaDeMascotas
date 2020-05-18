@@ -39,7 +39,7 @@ public class PersistenceConfig {
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		driverManagerDataSource.setUsername("root");
 		driverManagerDataSource.setPassword("root");
-		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/clinicademascotas");
+		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/clinicademascotas?serverTimezone=GMT-3");
 		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		return driverManagerDataSource;
 	}

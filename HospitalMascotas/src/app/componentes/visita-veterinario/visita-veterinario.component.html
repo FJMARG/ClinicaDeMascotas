@@ -1,0 +1,104 @@
+<div class="container _padding-top">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="offset-md-3 col-md-6 offset-md-3">
+            <div class="alert {{classstatus}}" role="alert">{{status}}</div>
+            <div *ngIf = "mascotas && mascotas.length != 0; else block">
+            <form #visitaForm="ngForm" (ngSubmit)="registrar(visitaForm)" class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="mascota" class="cols-sm-2 control-label">Mascota y dueño:</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <select class="form-control" name="mascota" id="mascota" ngModel>
+                                        <option *ngFor="let mascota of mascotas" value="{{mascota.id}}">{{mascota.nombre}} -> {{mascota.dueno.apellido}}, {{mascota.dueno.nombre}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fecha" class="cols-sm-2 control-label">Fecha:</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="date" class="form-control" name="fecha" id="fecha" ngModel>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="peso" class="cols-sm-2 control-label">Peso (Kg):</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" name="peso" id="peso" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="motivo" class="cols-sm-2 control-label">Motivo visita:</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <select class="form-control" name="motivo" id="motivo" ngModel>
+                                        <option value="VISITA">Visita</option>
+                                        <option value="VACUNACION">Vacunacion</option>
+                                        <option value="ENFERMEDAD">Enfermedad</option>
+                                        <option value="INTERVENCION_QUIRURGICA">Intervencion Quirurgica</option>
+                                        <option value="HISTORIAL_REPRODUCTIVO">Historial Reproductivo</option>
+                                        <option value="DESPARACITACION">Desparasitacion</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="diagnostico" class="cols-sm-2 control-label">Diagnostico:</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="diagnostico" id="diagnostico" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="indicaciones" class="cols-sm-2 control-label">Indicaciones:</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="indicaciones" id="indicaciones" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Registrar</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <button type="reset" class="btn btn-secondary btn-lg btn-block">Vaciar Campos</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+            <ng-template #block>
+                <p>No tienes mascotas asignadas.</p>
+            </ng-template>
+        </div>
+    </div>
+</div> <!-- /container -->

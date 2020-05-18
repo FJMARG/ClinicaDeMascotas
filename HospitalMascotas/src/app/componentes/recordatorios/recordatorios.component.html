@@ -1,0 +1,33 @@
+<div class="container">
+
+     <!-- Listado Recordatorios -->
+    <ul>
+        <div class="row" *ngFor="let recordatorio of recordatorios">
+            <div class="col-md-6">
+                <div class="row">
+                    <h2>Recordatorio Fecha: {{ recordatorio.fecha | date:"short" }}</h2>
+                </div>
+                <div class="row">
+                    <p>Descripcion: {{ recordatorio.descripcion }}</p>
+                </div>
+            </div>
+            <div class="offset-md-1"></div>            
+            <div class="col-md-5">
+                <div class="row">
+                    <h5>Mascota: </h5>
+                </div>
+                <div class="row">
+                    <p>Especie: {{ recordatorio.mascota.nombre }} </p>
+                </div>
+                <div class="row">
+                    <p>Raza: {{ recordatorio.mascota.raza }} </p>
+                </div>
+                <div class="row">
+                    <p>Color: {{ recordatorio.mascota.color }} </p>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </ul>
+    <!-- /.row -->
+</div>

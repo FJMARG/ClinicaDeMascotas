@@ -24,11 +24,11 @@ public class TokenServices {
      * @return token
      */
 
-	public String generateToken(String email, Rol rol,long id, int segundos) {
+	public String generateToken(String email, Rol rol,long id, int segundos, boolean v) {
 
         Date exp = getExpiration(new Date(), segundos);
 
-        return Jwts.builder().setSubject(email).setSubject(rol.toString()).setSubject(String.valueOf(id)).signWith(key).setExpiration(exp).compact();
+        return Jwts.builder().setSubject(email).setSubject(rol.toString()).setSubject(String.valueOf(id)).setSubject(String.valueOf(v)).signWith(key).setExpiration(exp).compact();
     }
 
     /**

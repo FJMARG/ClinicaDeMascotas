@@ -24,20 +24,18 @@
                 <div class="dropdown-menu" aria-labelledby="dropdown01" *ngIf="login.getRol() == 'VETERINARIO'">
                     <a class="dropdown-item" href="#">Gestionar Registros</a>
                     <a class="dropdown-item" href="#">Búsqueda Mascotas</a>
-                    <a class="dropdown-item" href="#">Alta Visita Veterinario</a>
+                    <a class="dropdown-item" href="/altavisitaveterinario">Alta Visita Veterinario</a>
                     <a class="dropdown-item" href="#">Alta Vacuna, Enfermedad, Intervencion Quirurgica</a>
                     <a class="dropdown-item" href="#">Alta Historial Reproductivo</a>
                     <a class="dropdown-item" href="#">Alta Desparasitaciones</a>
-                    <a class="dropdown-item" href="#">Aceptar Atención Mascotas</a>
+                    <a class="dropdown-item" href="/aceptarmascotas">Aceptar Atención Mascotas</a>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="dropdown01" *ngIf="login.getRol() == 'DUENO'">
-                    <a class="dropdown-item" href="#">Gestionar Registros</a>
-                    <a class="dropdown-item" href="#">Gestionar Mascotas</a>
-                    <a class="dropdown-item" href="/board">Listar mis Mascotas</a>
+                    <a class="dropdown-item" href="/gestionarmascotas">Gestionar Mascotas</a>
                     <a class="dropdown-item" href="/agregarmascota">Dar de Alta una Mascota</a>
-                    <a class="dropdown-item" href="#">Asignar Veterinario a una Mascota</a>
-                    <a class="dropdown-item" href="#">Agregar Recordatorio</a>
-                    <a class="dropdown-item" href="#">Listar Recordatorios</a>
+                    <a class="dropdown-item" href="/asignarveterinario">Asignar Veterinario a una Mascota</a>
+                    <a class="dropdown-item" href="/agregarrecordatorio">Agregar Recordatorio</a>
+                    <a class="dropdown-item" href="/listarrecordatorios">Listar Recordatorios</a>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="dropdown01" *ngIf="login.getRol() == 'ADMINISTRADOR'">
                     <a class="dropdown-item" href="/validarveterinarios">Validar Veterinarios</a>

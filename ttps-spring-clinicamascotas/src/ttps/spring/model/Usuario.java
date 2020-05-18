@@ -5,15 +5,21 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.internal.Nullable;
 
 import enums.Rol;
 @Entity
@@ -34,7 +40,7 @@ public class Usuario {
 	@JsonIgnore
 	private List<Visita> visitas;
 	private boolean veterinarioValido;
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JsonIgnore
 	private List<Recordatorio> recordatorios;
 	@OneToOne
@@ -42,12 +48,27 @@ public class Usuario {
 	@OneToMany(mappedBy = "dueno")
 	@JsonIgnore
 	private List<Mascota> mascotas;
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name = "veterinario_mascotaAtendida",
+				joinColumns=
+						@JoinColumn(name="usuario_id", referencedColumnName="id"),
+				inverseJoinColumns=
+						@JoinColumn(name="mascota_id", referencedColumnName="id")
+				)
 	@OneToMany
 	@JsonIgnore
 	private List<Mascota> mascotasAtendidas;
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "veterinario")
 	@JsonIgnore
 	private List<Mascota> mascotasAsignadas;
+	@JoinTable(name = "veterinario_mascotaPendiente",
+			joinColumns=
+					@JoinColumn(name="usuario_id", referencedColumnName="id"),
+			inverseJoinColumns=
+					@JoinColumn(name="mascota_id", referencedColumnName="id")
+			)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany
 	@JsonIgnore
 	private List<Mascota> mascotasPendientes;
@@ -117,6 +138,9 @@ public class Usuario {
 	public void setRecordatorios(List<Recordatorio> recordatorios) {
 		this.recordatorios = recordatorios;
 	}
+	public void addRecordatorio(Recordatorio recordatorio) {
+		this.recordatorios.add(recordatorio);
+	}
 	public ConfigFichaPublica getFichaPublica() {
 		return fichaPublica;
 	}
@@ -147,5 +171,13 @@ public class Usuario {
 	public void setMascotasPendientes(List<Mascota> mascotasPendientes) {
 		this.mascotasPendientes = mascotasPendientes;
 	}
-
+	public void addMascotaAsignada(Mascota mascota) {
+		this.mascotasAsignadas.add(mascota);
+	}
+	public void addMascotaAtendida(Mascota mascota) {
+		this.mascotasAtendidas.add(mascota);
+	}
+	public void addMascotaPendiente(Mascota mascota) {
+		this.mascotasPendientes.add(mascota);
+	}
 }

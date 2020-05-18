@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { SessionService } from 'src/app/servicios/session.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-validar-veterinario',
@@ -10,15 +11,18 @@ import { SessionService } from 'src/app/servicios/session.service';
 export class ValidarVeterinarioComponent implements OnInit {
 
   veterinarios:any;
+  selected:any;
+  status:any;
+  classstatus:any;
 
   constructor(private usuarioService: UsuarioService, private sesionService:SessionService) { }
 
   ngOnInit() {
-    this.getMascotasDueno();
     this.redirect();
+    this.getVeterinariosNoValidos();
   }
 
-  getMascotasDueno(){  
+  getVeterinariosNoValidos(){  
     let obs = this.usuarioService.getVeterinariosNoValidos();
     obs.subscribe(vet => {
       this.veterinarios = vet;
@@ -26,8 +30,23 @@ export class ValidarVeterinarioComponent implements OnInit {
     return this.veterinarios;
   }
 
+  actualizar(){
+    this.selected = this.veterinarios.filter((v) => {
+      return v.veterinarioValido;
+    });
+  }
+
+  validarVeterinarios(form:NgForm){
+    if(form.valid){
+      if (this.selected){
+        this.usuarioService.putVeterinarios(this.selected).subscribe(vets=>this.selected);
+        self.location.reload();
+      }
+    }
+  }
+
   redirect(){
-    this.sesionService.redirectTo("/index");  
+    this.sesionService.redirectTo("/index");
   }
 
 }

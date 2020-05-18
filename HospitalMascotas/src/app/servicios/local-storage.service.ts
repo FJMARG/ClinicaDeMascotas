@@ -59,6 +59,16 @@ export class LocalStorageService {
     return exp;
   }
 
+  getVeterinarioValido(){
+    let data = localStorage.getItem('currentUserData');
+    if (data == null)
+      return;
+    let string = data.toString();
+    let object = JSON.parse(string);
+    let rol = object.veterinarioValido;
+    return rol;
+  }
+
   getCurrentUserData(){
     let data = localStorage.getItem('currentUserData');
     return data;

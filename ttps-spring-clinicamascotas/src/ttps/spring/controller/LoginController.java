@@ -23,14 +23,14 @@ public class LoginController {
     private TokenServices tokenServices;
 
     // 20 mins
-    private final int EXPIRATION_IN_SEC = 1200;
+    private final int EXPIRATION_IN_SEC = 7200;
 
     @PostMapping(path = "/auth")
     public ResponseEntity<?> authenticate(@RequestBody LoginFormData form) {
     	Usuario u = usuarioDAO.recuperar(form.getEmail());
         if(u != null && u.getPassword().equals(form.getPassword())) {
-            String token = tokenServices.generateToken(form.getEmail(), u.getRolUsuario(), u.getId(), EXPIRATION_IN_SEC);
-            return ResponseEntity.ok(new TokenData(token, EXPIRATION_IN_SEC, form.getEmail(),u.getRolUsuario(), u.getId()));
+            String token = tokenServices.generateToken(form.getEmail(), u.getRolUsuario(), u.getId(), EXPIRATION_IN_SEC, u.isVeterinarioValido());
+            return ResponseEntity.ok(new TokenData(token, EXPIRATION_IN_SEC, form.getEmail(),u.getRolUsuario(), u.getId(), u.isVeterinarioValido()));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o password incorrecto");
         }

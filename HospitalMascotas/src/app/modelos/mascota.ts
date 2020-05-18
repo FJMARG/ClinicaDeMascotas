@@ -2,6 +2,7 @@ import { Usuario } from './usuario';
 
 export class Mascota {
     
+    private id: number;
     private nombre: string;
     private fechaNacimiento: string;
     private especie: string;
@@ -28,6 +29,15 @@ export class Mascota {
         this.veterinario = veterinario;*/
         this.visitas = null;
     }
+    
+    public getId(): number {
+        return this.id;
+    }
+
+    public setId(value: number) {
+        this.id = value;
+    }
+
     public getVeterinario(): Usuario {
         return this.veterinario;
     }

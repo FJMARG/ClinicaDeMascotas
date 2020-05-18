@@ -17,9 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import enums.Rol;
 import ttps.spring.clasesDAO.ClinicaDAO;
 import ttps.spring.clasesDAO.ConfigFichaPublicaDAO;
+import ttps.spring.clasesDAO.MascotaDAO;
+import ttps.spring.clasesDAO.RecordatorioDAO;
 import ttps.spring.clasesDAO.UsuarioDAO;
 import ttps.spring.model.Clinica;
 import ttps.spring.model.ConfigFichaPublica;
+import ttps.spring.model.Mascota;
+import ttps.spring.model.Recordatorio;
 import ttps.spring.model.Usuario;
 
 @RestController
@@ -31,6 +35,10 @@ public class UsuarioController {
 	ConfigFichaPublicaDAO fDAO;
 	@Autowired
 	ClinicaDAO cDAO;
+	@Autowired
+	RecordatorioDAO rDAO;
+	@Autowired
+	MascotaDAO mDAO;
 	
 	@GetMapping
 	public ResponseEntity <List<Usuario>> listarUsuarios(){
@@ -142,5 +150,112 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(usuarioActual, HttpStatus.OK);
 	}
 	
+	@GetMapping("/recordatorios/{id}")
+	public ResponseEntity <List<Recordatorio>> recuperarRecordatorios(@PathVariable("id") long id){
+		System.out.println("Entro");
+		List<Recordatorio> r = uDAO.recuperarRecordatoriosDe(id);
+		if (r.isEmpty())
+			return new ResponseEntity<List<Recordatorio>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Recordatorio>>(r,HttpStatus.OK);
+	}
+	
+	@PostMapping("/recordatorios/agregar/{id}/{mascota}")
+	public ResponseEntity <Void> agregarRecordatorioUsuario(@RequestBody Recordatorio r, @PathVariable("id") long id, @PathVariable("mascota") long mascotaid) {
+		Usuario u = uDAO.recuperar(id);
+		Mascota m = mDAO.recuperar(mascotaid);
+		if ((u == null) || (m == null)){
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT); //Código de respuesta 409
+		}
+		r.setMascota(m);
+		u.addRecordatorio(r);
+		rDAO.persistir(r);
+		uDAO.actualizar(u);
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/validarVeterinarios")
+	public ResponseEntity<List<Usuario>> actualizarUsuario(@RequestBody List<Usuario> vets) {
+		if (vets == null)
+			return new ResponseEntity<List<Usuario>>(HttpStatus.NOT_FOUND);
+		for (Usuario v : vets) {
+			Usuario u = uDAO.recuperar(v.getId());
+			if (u == null) {
+				return new ResponseEntity<List<Usuario>>(HttpStatus.NOT_FOUND);
+			}
+			u.setVeterinarioValido(v.isVeterinarioValido());
+			uDAO.actualizar(u);
+		}
+		return new ResponseEntity<List<Usuario>>(vets, HttpStatus.OK);
+	}
+	
+	@GetMapping("/veterinariosValidos")
+	public ResponseEntity <List<Usuario>> listarVeterinariosValidos(){
+		List<Usuario> usuarios = uDAO.recuperarVeterinariosValidos("apellido");
+		if (usuarios.isEmpty())
+			return new ResponseEntity<List<Usuario>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Usuario>>(usuarios,HttpStatus.OK);
+	}
+	
+	@GetMapping("/mascotasasignadas/{id}")
+	public ResponseEntity <List<Mascota>> retornarMascotasAsignadas(@PathVariable("id") long id) {
+		Usuario v = uDAO.recuperar(id);
+		if (v == null){
+			return new ResponseEntity<List<Mascota>>(HttpStatus.CONFLICT); //Código de respuesta 409
+		}
+		if (v.getRolUsuario() != Rol.VETERINARIO) {
+			return new ResponseEntity<List<Mascota>>(HttpStatus.CONFLICT); //Código de respuesta 409
+		}
+		List<Mascota> masc = v.getMascotasAsignadas();
+		return new ResponseEntity <List<Mascota>>(masc,HttpStatus.OK);
+	}
+	
+	@PutMapping("/aceptarmascotas/{id}")
+	public ResponseEntity <Void> aceptarMascota(@PathVariable("id") long id, @RequestBody long[] mids) {
+		Usuario v = uDAO.recuperar(id);
+		if (v == null){
+			System.out.println("No existe usuario");
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT); //Código de respuesta 409
+		}
+		if (v.getRolUsuario() != Rol.VETERINARIO) {
+			System.out.println("No tiene rol veterinario");
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT); //Código de respuesta 409
+		}
+		List<Mascota> lista = v.getMascotasPendientes();
+		if (lista == null) {
+			System.out.println("No tiene lista de mascotas pendientes");
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
+		for (long mid : mids) {
+			Mascota m = mDAO.recuperar(mid);
+			if (m == null) {
+				System.out.println("Una mascota no existe");
+				return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+			}
+			if (!lista.contains(m)) {
+				System.out.println("La mascota existe pero no es mascota pendiente del veterinario");
+				return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+			}
+			v.addMascotaAsignada(m);
+			m.setVeterinario(v);
+			mDAO.actualizar(m);
+			lista.remove(m);
+		}
+		v.setMascotasPendientes(lista);
+		uDAO.actualizar(v);
+		return new ResponseEntity <Void>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/mascotaspendientes/{id}")
+	public ResponseEntity <List<Mascota>> retornarMascotasPendientes(@PathVariable("id") long id) {
+		Usuario v = uDAO.recuperar(id);
+		if (v == null){
+			return new ResponseEntity<List<Mascota>>(HttpStatus.CONFLICT); //Código de respuesta 409
+		}
+		if (v.getRolUsuario() != Rol.VETERINARIO) {
+			return new ResponseEntity<List<Mascota>>(HttpStatus.CONFLICT); //Código de respuesta 409
+		}
+		List<Mascota> masc = v.getMascotasPendientes();
+		return new ResponseEntity <List<Mascota>>(masc,HttpStatus.OK);
+	}
 	
 }

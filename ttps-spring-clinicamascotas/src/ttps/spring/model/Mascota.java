@@ -30,11 +30,9 @@ public class Mascota {
 	private String foto;
 	@ManyToOne(optional = true)
 	@JoinColumn(name="id_dueno")
-	@JsonIgnore
 	private Usuario dueno;
 	@ManyToOne(optional = true)
 	@JoinColumn(name="id_veterinario")
-	@JsonIgnore
 	private Usuario veterinario;
 	@OneToMany(mappedBy="mascota")
 	@JsonIgnore
@@ -111,6 +109,14 @@ public class Mascota {
 	}
 	public void setVisitas(List<Visita> visitas) {
 		this.visitas = visitas;
+	}
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof Mascota)){
+            return false;
+        }
+		Mascota temp = (Mascota)o;
+		return this.id == temp.getId();
 	}
 	
 }
