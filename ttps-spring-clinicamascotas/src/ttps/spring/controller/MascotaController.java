@@ -146,5 +146,10 @@ public class MascotaController {
 		return new ResponseEntity<Mascota> (masc, HttpStatus.OK);
 	}
 	
+	@GetMapping("/find/{term}")
+	public ResponseEntity <List<Mascota>> listarMascotas(@PathVariable("term") String term) {
+		List<Mascota> mascotas = mDAO.buscarMascotas(term);
+		return new ResponseEntity<List<Mascota>>(mascotas,HttpStatus.OK);
+	}
 	
 }

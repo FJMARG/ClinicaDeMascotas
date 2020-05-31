@@ -1,0 +1,9 @@
+<div class="container">
+    <p>Guarda la imagen donde desee</p>
+    <div class="row" *ngIf="url">
+      <div class="col-md-3">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{url}}">
+      </div>
+    </div>
+    <hr>
+</div>

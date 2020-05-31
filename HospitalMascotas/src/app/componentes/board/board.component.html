@@ -4,6 +4,7 @@
     <div class="row">
       <div class="alert alert-danger" role="alert" *ngIf="msj">{{ msj }}</div>
     </div>
+    <div *ngIf="mascotas; else elseBlock">
     <div class="row" *ngFor="let mascota of mascotas">
 
       <div class="col-md-4">
@@ -22,6 +23,8 @@
         <p>Señas particulares: {{ mascota.senas }}</p>
       </div>
     </div>
+    </div>
+    <ng-template #elseBlock>No hay mascotas.</ng-template>
     <!-- /.row -->
     <hr>
 

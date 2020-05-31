@@ -78,4 +78,10 @@ public class VisitaController {
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
+	@GetMapping
+	public ResponseEntity <List<Visita>> recuperarVisitas() {
+		List<Visita> v = vDAO.recuperarTodos(null);
+		return new ResponseEntity<List<Visita>>(v,HttpStatus.CREATED);
+	}
+	
 }

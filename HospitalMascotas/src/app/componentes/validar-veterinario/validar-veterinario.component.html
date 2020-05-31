@@ -2,7 +2,7 @@
 <div class="container">
   <div class="alert {{classstatus}}" role="alert">{{status}}</div>
     <!-- Listado Veterinarios -->
-    <div *ngIf="veterinarios">
+    <div *ngIf="veterinarios; else elseBlock">
       <form #validarForm="ngForm" (ngSubmit)="validarVeterinarios(validarForm)" class="form-horizontal">
         <ul>
             <div class="row" *ngFor="let veterinario of veterinarios; let i = index;">
@@ -12,6 +12,7 @@
         <input class="btn btn-primary btn-lg btn-block" type="submit" value="Confirmar">
       </form>
     </div>
+    <ng-template #elseBlock>No hay veterinarios a validar.</ng-template>
     <!-- /.row -->
     <hr>
 

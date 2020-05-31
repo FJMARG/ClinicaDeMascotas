@@ -2,16 +2,20 @@
 <div class="container">
     <div class="alert {{classstatus}}" role="alert">{{status}}</div>
       <!-- Listado Mascotas -->
-      <div *ngIf="mascotas">
+      <div *ngIf="mascotas; else elseBlock">
+      <div *ngIf="mascotas.length != 0; else elseBlock">
+        <div>
         <form #aceptarMascotaForm="ngForm" (ngSubmit)="aceptarMascota(aceptarMascotaForm)" class="form-horizontal">
           <ul>
-              <div class="row" *ngFor="let mascota of mascotas; let i = index;">
-                  <li>Nombre Mascota: {{ mascota.nombre }}. Dueño: {{ mascota.dueno.apellido }}, {{mascota.dueno.nombre}} | <label for="aceptar" class="cols-sm-2 control-label">¿Aceptar? -> </label> <input type="checkbox" name="aceptar" (change)="seleccionar(mascota.id)"></li> 
-              </div>
+            <li *ngFor="let mascota of mascotas; let i = index;"><div class="row">&nbsp;Nombre Mascota: {{ mascota.nombre }}. Dueño: {{ mascota.dueno.apellido }}, {{mascota.dueno.nombre}} | <label for="aceptar" class="cols-sm-2 control-label">¿Aceptar? -> </label> <input type="checkbox" name="aceptar" (change)="seleccionar(mascota.id)"></div>
+            </li>
           </ul>
-          <input class="btn btn-primary btn-lg btn-block" type="submit" value="Aceptar">
+          <input class="btn btn-primary" type="submit" value="Aceptar">
         </form>
       </div>
+      </div>
+      </div>
+      <ng-template #elseBlock>No hay mascotas.</ng-template>
       <!-- /.row -->
       <hr>
   

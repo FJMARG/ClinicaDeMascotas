@@ -19,7 +19,7 @@ export class UsuarioService {
 
   putUsuario(u:Usuario,id:string):Observable<Usuario>{
     let url = "http://localhost:8080/ttps-spring-clinicamascotas/usuario/"+id;
-    return this.http.put<Usuario>(url, u).pipe(catchError((err: any) => {return Observable.of(u)}));
+    return this.http.put<Usuario>(url, u);
   }
 
   getUsuariosRol(rol:string):Observable<any>{
@@ -38,7 +38,7 @@ export class UsuarioService {
   }
 
   postRecordatorioPara(r:Recordatorio, id:string, mascotaid:string):Observable<Recordatorio>{
-    return this.http.post<Recordatorio>("http://localhost:8080/ttps-spring-clinicamascotas/usuario/recordatorios/agregar/"+id+"/"+mascotaid, r).pipe(catchError((err: any) => {return Observable.of(r)}));
+    return this.http.post<Recordatorio>("http://localhost:8080/ttps-spring-clinicamascotas/usuario/recordatorios/agregar/"+id+"/"+mascotaid, r);
   }
 
   putVeterinarios(vet:any):Observable<any>{
@@ -47,7 +47,7 @@ export class UsuarioService {
   }
 
   postVisitaVeterinarioPor(v:any, id:string, mascotaid:string):Observable<any>{
-    return this.http.post<any>("http://localhost:8080/ttps-spring-clinicamascotas/visita/mascota/"+mascotaid+"/veterinario/"+id, v).pipe(catchError((err: any) => {return Observable.of(v)}));
+    return this.http.post<any>("http://localhost:8080/ttps-spring-clinicamascotas/visita/mascota/"+mascotaid+"/veterinario/"+id, v);
   }
 
   getVeterinariosValidos():Observable<any>{

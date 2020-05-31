@@ -39,7 +39,7 @@ export class AceptarmascotaComponent implements OnInit {
           this.usuarioService.putAceptarMascotas(this.ids, this.idvet).subscribe();
           this.status = "Se acepto la/s mascota/s correctamente.";
           this.classstatus = "alert-success";
-          console.log(this.ids);
+          self.location.reload();
         }
         else {
           this.status = "Debe seleccionar al menos una opcion.";
@@ -53,6 +53,7 @@ export class AceptarmascotaComponent implements OnInit {
     let obs = this.usuarioService.getMascotasPendientes(this.idvet);
     obs.subscribe(m => {
       this.mascotas = m;
+      console.log(m);
     });
   }
 

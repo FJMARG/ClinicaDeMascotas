@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Mascota } from 'src/app/modelos/mascota';
-import { Usuario } from 'src/app/modelos/usuario';
 import { RegistroService } from 'src/app/servicios/registro.service';
 import { LocalStorageService } from 'src/app/servicios/local-storage.service';
 import { RegistroMascotaService } from 'src/app/servicios/registro-mascotas-service';
-import { ConfigFichaPublica } from 'src/app/modelos/config-ficha-publica';
 import { SessionService } from 'src/app/servicios/session.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-registro-mascota',
@@ -15,7 +14,7 @@ import { SessionService } from 'src/app/servicios/session.service';
 })
 export class RegistroMascotaComponent implements OnInit {
   
-  selected:string='';
+  selected:string='M';
   veterinarios:any;
   status:string;
   classstatus:string;
@@ -84,8 +83,20 @@ export class RegistroMascotaComponent implements OnInit {
     return null;
   }*/
 
+  validar(form:NgForm){
+    if (!form.valid)
+      return false;
+    if(!(form.value.nombre && form.value.sexo && form.value.fechaNacimiento && form.value.especie && form.value.raza && form.value.color && form.value.senas))
+      return false;
+    let f = new Date();
+    let formF = new Date(form.value.fechaNacimiento);
+    if (formF > f)
+      return false;
+    return true;
+  }
+
   onSubmit(form:NgForm){
-    if (form.valid){
+    if (this.validar(form)){
       let m = new Mascota();
       /*let veterinario = this.getVeterinario(form.value.veterinario);
       m.setVeterinario(veterinario);
@@ -110,9 +121,24 @@ export class RegistroMascotaComponent implements OnInit {
       m.setFoto(form.value.foto);
       let d = this.localStorage.getId();
       console.log("Id del dueño:"+d);
-      this.registroMascotaService.crearMascota(m, d).subscribe(mascota=>m);
       this.status='La mascota fue registrada correctamente.';
       this.classstatus='alert-success'; 
+      this.registroMascotaService.crearMascota(m, d).subscribe(mascota=>m, (err:HttpErrorResponse) => {
+        console.log("El error es: "+err.status);
+        if(err.status == 409){
+          this.status="Usuario no existe en el sistema o mascota ya esta registrada.";
+          this.classstatus="alert-danger";
+        }
+        else{
+          this.status="Error desconocido.";
+          this.classstatus="alert-danger";
+        }
+      });
+      window.scroll(0,0);
+    }
+    else{
+      this.status='Formulario invalido. ¿Fecha futura? ¿Campos vacios?';
+      this.classstatus='alert-danger'; 
     }
 }
 

@@ -7,6 +7,7 @@ import { Mascota } from 'src/app/modelos/mascota';
 import { ActivatedRoute } from '@angular/router';
 import { MascotasService } from 'src/app/servicios/mascotas-service';
 import { NgForm } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-editar-mascota',
@@ -56,13 +57,36 @@ export class EditarMascotaComponent implements OnInit {
     }
   }
 
+  validar(form:NgForm){
+    if (!form.valid)
+      return false;
+    if(!(form.value.color && form.value.senas))
+      return false;
+    return true;
+  }
+
   editarMascota(form:NgForm){
-    if (form.valid){
+    if (this.validar(form)){
       this.mascota.setColor(form.value.color);
       this.mascota.setSenas(form.value.senas);
-      this.mascotasService.putMascota(this.mascota).subscribe();
       this.status='La mascota fue actualizada correctamente.';
       this.classstatus='alert-success'; 
+      this.mascotasService.putMascota(this.mascota).subscribe(masc=>this.mascota, (err:HttpErrorResponse) => {
+        console.log("El error es: "+err.status);
+        if(err.status == 409){
+          this.status="No existe la mascota en el sistema.";
+          this.classstatus="alert-danger";
+        }
+        else{
+          this.status="Error desconocido.";
+          this.classstatus="alert-danger";
+        }
+      });
+      window.scroll(0,0); 
+    }
+    else{
+      this.status='Formulario invalido.';
+      this.classstatus='alert-danger';
     }
   }
 

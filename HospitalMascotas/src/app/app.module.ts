@@ -32,6 +32,13 @@ import { VisitaVeterinarioComponent } from './componentes/visita-veterinario/vis
 import { AsignarVeterinarioComponent } from './componentes/asignar-veterinario/asignar-veterinario.component';
 import { AsignarAMascotaComponent } from './componentes/asignar-amascota/asignar-amascota.component';
 import { AceptarmascotaComponent } from './componentes/aceptarmascota/aceptarmascota.component';
+import { VeiComponent } from './componentes/vei/vei.component';
+import { HistorialReproductivoComponent } from './componentes/historial-reproductivo/historial-reproductivo.component';
+import { DesparasitacionComponent } from './componentes/desparasitacion/desparasitacion.component';
+import { MostrarDuenoMascotaComponent } from './componentes/mostrar-dueno-mascota/mostrar-dueno-mascota.component';
+import { GenerarQrComponent } from './componentes/generar-qr/generar-qr.component';
+import { BuscarMascotasComponent } from './componentes/buscar-mascotas/buscar-mascotas.component';
+import { AcercaComponent } from './componentes/acerca/acerca.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
@@ -50,6 +57,14 @@ const appRoutes: Routes = [
   { path: 'asignarveterinario', component: AsignarVeterinarioComponent },
   { path: 'asignaramascota/:id', component: AsignarAMascotaComponent },
   { path: 'aceptarmascotas', component: AceptarmascotaComponent },
+  { path: 'altavei', component: VeiComponent },
+  { path: 'altahistorialreproductivo', component: HistorialReproductivoComponent },
+  { path: 'altadesparasitacion', component: DesparasitacionComponent },
+  { path: 'mostrarduenomascota/:id', component: MostrarDuenoMascotaComponent },
+  { path: 'generarqr/:id', component: GenerarQrComponent },
+  { path: 'buscarmascotas', component: BuscarMascotasComponent },
+  { path: 'visitas', component: VisitasComponent },
+  { path: 'acerca', component: AcercaComponent },
 ];
 
 @NgModule({
@@ -72,7 +87,14 @@ const appRoutes: Routes = [
     VisitaVeterinarioComponent,
     AsignarVeterinarioComponent,
     AsignarAMascotaComponent,
-    AceptarmascotaComponent
+    AceptarmascotaComponent,
+    VeiComponent,
+    HistorialReproductivoComponent,
+    DesparasitacionComponent,
+    MostrarDuenoMascotaComponent,
+    GenerarQrComponent,
+    BuscarMascotasComponent,
+    AcercaComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,38 @@
+<div class="container _padding-top">
+    <div *ngIf="mascotas; else elseBlock">
+    <br>
+    <form #busquedaForm="ngForm" (ngSubmit)="onSubmit(busquedaForm)" class="form-horizontal">
+        <input type="text" name="busqueda" id="busqueda" ngModel>
+        <button type="submit" class="btn btn-primary"> Buscar </button>
+    </form>
+    <div *ngIf="status" class="alert {{classstatus}}" role="alert">{{status}}</div>
+    <hr>
+    <br>
+    <div class="row">
+      <div class="alert alert-danger" role="alert" *ngIf="msj">{{ msj }}</div>
+    </div>
+    <div class="row" *ngFor="let mascota of mascotas">
+      <div class="col-md-3">
+        <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/150x150" alt="">
+      </div>
+      <div class="col-md-3">
+        <h3>Nombre: {{ mascota.nombre }}</h3>
+        <p>Sexo: {{ mascota.sexo }}</p>
+        <p>Fecha de Nacimiento: {{ mascota.fechaNacimiento | date:"short" }}</p>
+        <p *ngIf = "mascota.veterinario">Veterinario: {{ mascota.veterinario.apellido }}, {{ mascota.veterinario.nombre }}</p>
+      </div>
+      <div class="col-md-3">
+        <p>Especie: {{ mascota.especie }}</p>
+        <p>Raza: {{ mascota.raza }}</p>
+        <p>Color: {{ mascota.color }}</p>
+        <p>Señas particulares: {{ mascota.senas }}</p>
+      </div>
+      <div class="col-md-3">
+        <p>Nombre Dueno: {{ mascota.dueno.nombre }}</p>
+        <p>Apellido Dueno: {{ mascota.dueno.apellido }}</p>
+      </div>
+    </div>
+    </div>
+    <ng-template #elseBlock>No hay mascotas.</ng-template>
+    <hr>
+</div>

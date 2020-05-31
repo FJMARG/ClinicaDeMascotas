@@ -38,10 +38,15 @@ public class JWTFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-
+        
+        
+        String[] temp = req.getRequestURI().split("/");
+        String id = temp[temp.length - 1];
+        String url = "/ttps-spring-clinicamascotas/mascota/"+id;
+        
         // El login del usuarios es publico
         System.out.println(req.getRequestURI());
-        if ("/ttps-spring-clinicamascotas/auth".equals(req.getRequestURI()) || "/ttps-spring-clinicamascotas/usuario".equals(req.getRequestURI()) || HttpMethod.OPTIONS.matches(req.getMethod())) {
+        if ("/ttps-spring-clinicamascotas/auth".equals(req.getRequestURI()) || "/ttps-spring-clinicamascotas/usuario".equals(req.getRequestURI()) || url.equals(req.getRequestURI()) || HttpMethod.OPTIONS.matches(req.getMethod())) {
             chain.doFilter(request, response);
             return;
         }

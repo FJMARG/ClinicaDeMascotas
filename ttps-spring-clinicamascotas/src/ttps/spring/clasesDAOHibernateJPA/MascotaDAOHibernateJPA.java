@@ -37,5 +37,13 @@ public class MascotaDAOHibernateJPA extends GenericDAOHibernateJPA<Mascota> impl
 		List<Mascota> resultado = (List<Mascota>)consulta.getResultList();
 		return resultado;
 	}
+	
+	@Override
+	public List<Mascota> buscarMascotas(String termino){
+		Query consulta= this.getEntityManager().createQuery("select e from " + getPersistentClass().getSimpleName()+" e where e.nombre LIKE '%"+termino+"%' or e.especie LIKE '%"+termino+"%' or e.raza LIKE '%"+termino+"%' or e.dueno.nombre LIKE '%"+termino+"%' or e.dueno.apellido LIKE '%"+termino+"%'");
+		@SuppressWarnings("unchecked")
+		List<Mascota> resultado = (List<Mascota>)consulta.getResultList();
+		return resultado;
+	}
 
 }

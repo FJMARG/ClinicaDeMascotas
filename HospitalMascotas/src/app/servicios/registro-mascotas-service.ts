@@ -20,7 +20,7 @@ export class RegistroMascotaService {
 
     crearMascota(mascota:Mascota, dueno:number):Observable<Mascota>{
         let path = 'http://localhost:8080/ttps-spring-clinicamascotas/mascota/agregar_mascota/'+dueno;
-        return this.http.post<Mascota>(path, mascota).pipe(catchError((err: any) => {return Observable.of(mascota)}));
+        return this.http.post<Mascota>(path, mascota);
     }
 
     getUsuarios(): Observable<Usuario> {

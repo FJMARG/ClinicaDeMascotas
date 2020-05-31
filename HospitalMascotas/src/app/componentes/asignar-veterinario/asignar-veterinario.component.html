@@ -1,6 +1,7 @@
 <!-- Page Content -->
 <div class="container _padding-top">
     <!-- Listado Mascotas -->
+    <div *ngIf="mascotas; else elseBlock">
     <div class="row" *ngFor="let mascota of mascotas">
     <div class="col-md-3">
         <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/300x300" alt="">
@@ -9,7 +10,7 @@
         <h3>Nombre: {{ mascota.nombre }}</h3>
         <p>Sexo: {{ mascota.sexo }}</p>
         <p>Fecha de Nacimiento: {{ mascota.fechaNacimiento | date:"short" }}</p>
-        <p *ngIf ="mascota.veterinario">Veterinario: {{ mascota.veterinario }}</p>
+        <p *ngIf ="mascota.veterinario">Veterinario: {{ mascota.veterinario.apellido }}, {{ mascota.veterinario.nombre }}</p>
     </div>
     <div class="col-md-3">
         <p>Especie: {{ mascota.especie }}</p>
@@ -18,9 +19,11 @@
         <p>Señas particulares: {{ mascota.senas }}</p>
     </div>
     <div class="col-md-3">
-        <a href="/asignaramascota/{{mascota.id}}">Asignar veterinario</a>     
+        <a  routerLink="/asignaramascota/{{mascota.id}}">Asignar veterinario</a>     
     </div>
     </div>
+    </div>
+    <ng-template #elseBlock>No hay mascotas.</ng-template>
     <!-- /.row -->
     <hr>
 

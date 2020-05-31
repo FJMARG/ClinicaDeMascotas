@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   login(form:NgForm){
     if (!form.valid){
-      this.msj = "Formulario invalido.";
+      this.msj = "Formulario invalido. No puden haber campos vacios";
       return;
     }
     this.loginService.login(form.value.lemail, form.value.lpass).pipe(first())

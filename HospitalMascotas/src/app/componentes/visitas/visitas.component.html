@@ -1,1 +1,31 @@
-<p>visitas works!</p>
+<div class="container _padding-top">
+    <div *ngIf="visitas; else elseBlock">
+    <div *ngFor="let visita of visitas">
+    <hr>
+    <div class="row">
+      <div class="col-md-3">
+        <p *ngIf="visita.fecha">Fecha: {{ visita.fecha | date:"short" }}</p>
+        <p *ngIf="visita.motivoVisita">Tipo de consulta: {{ visita.motivoVisita }} </p>
+        <p *ngIf="visita.descripcion">Descripcion: {{ visita.descripcion }}</p>
+      </div>
+      <div class="col-md-3">
+        <p *ngIf="visita.diagnostico">Diagnostico: {{ visita.diagnostico }}</p>
+        <p *ngIf="visita.droga">Droga: {{ visita.droga }}</p>
+        <p *ngIf="visita.indicaciones">Indicaciones: {{ visita.indicaciones }}</p>
+        <p *ngIf="visita.peso">Peso: {{ visita.peso }}</p>
+      </div>
+      <div class="col-md-3">
+        <p>Nombre Mascota: {{ visita.mascota.nombre }}</p>
+        <p>Color Mascota: {{ visita.mascota.color }}</p>
+        <p>Dueño Mascota: {{ visita.mascota.dueno.apellido }}, {{visita.mascota.dueno.nombre}}</p>
+      </div>
+      <div *ngIf="visita.veterinario" class="col-md-3">
+        <p>Nombre Veterinario: {{ visita.veterinario.nombre }}</p>
+        <p>Apellido Veterinario: {{ visita.veterinario.apellido }}</p>
+      </div>
+    </div>
+    </div>
+    </div>
+    <ng-template #elseBlock>No hay registros.</ng-template>
+    <hr>
+  </div>

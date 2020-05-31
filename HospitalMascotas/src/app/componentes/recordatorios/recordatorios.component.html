@@ -1,6 +1,7 @@
 <div class="container">
 
      <!-- Listado Recordatorios -->
+     <div *ngIf="recordatorios; else elseBlock">
     <ul>
         <div class="row" *ngFor="let recordatorio of recordatorios">
             <div class="col-md-6">
@@ -27,7 +28,9 @@
                 </div>
             </div>
         </div>
-        <hr>
     </ul>
+    </div>
+    <ng-template #elseBlock>No hay mascotas.</ng-template>
+    <hr>
     <!-- /.row -->
 </div>

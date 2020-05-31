@@ -40,4 +40,9 @@ export class MascotasService {
         let url = "http://localhost:8080/ttps-spring-clinicamascotas/mascota/veterinario";
         return this.http.put<Mascota>(url, [id ,vid]);
     }
+
+    getMascotasLike(term:string):Observable<any>{
+        let url = "http://localhost:8080/ttps-spring-clinicamascotas/mascota/find/"+term;
+        return this.http.get<any>(url);
+    }
 }

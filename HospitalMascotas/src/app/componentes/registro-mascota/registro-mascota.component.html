@@ -19,7 +19,10 @@
                             <label for="sexo" class="cols-sm-2 control-label">Sexo*</label>
                             <div class="cols-sm-10">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="sexo" id="sexo" ngModel/>
+                                    <select [(ngModel)]="selected" class="form-control" name="sexo" id="sexo" >
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Femenino</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -31,7 +34,7 @@
                             <label for="fechaNacimiento" class="cols-sm-2 control-label">Fecha de Nacimiento*</label>
                             <div class="cols-sm-10">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="fechaNacimiento" id="fechaNacimiento" ngModel/>
+                                    <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento" ngModel/>
                                 </div>
                             </div>
                         </div>

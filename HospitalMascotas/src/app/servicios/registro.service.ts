@@ -23,6 +23,6 @@ export class RegistroService {
 
   crearUsuario(user:Usuario):Observable<Usuario>{
       console.log("Usuario en servicio registro:"+JSON.stringify(user));
-      return this.http.post<Usuario>("http://localhost:8080/ttps-spring-clinicamascotas/usuario", user).pipe(catchError((err: any) => {return Observable.of(user)}));
+      return this.http.post<Usuario>("http://localhost:8080/ttps-spring-clinicamascotas/usuario", user);
   }
 }

@@ -4,6 +4,7 @@ import { Usuario } from 'src/app/modelos/usuario';
 import { RegistroService } from 'src/app/servicios/registro.service';
 import { Clinica } from 'src/app/modelos/clinica';
 import { ConfigFichaPublica } from 'src/app/modelos/config-ficha-publica';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-registro',
@@ -29,10 +30,7 @@ export class RegistroComponent implements OnInit {
   constructor(private registroService: RegistroService) { }
 
   ngOnInit() {
-    /*const request = {
-      ...this.formValue,
-      ...this.formValueVete
-    }*/
+
   }
 
   validar(form:NgForm){
@@ -42,7 +40,9 @@ export class RegistroComponent implements OnInit {
       return false;
     if (form.value.password != form.value.confirm)
       return false;
-      return true;
+    if(!(form.value.email && form.value.cEmail && form.value.password && form.value.confirm && form.value.nombre && form.value.apellido && form.value.telefono))
+      return false;
+    return true;
     }
     
     onSubmit(form:NgForm){
@@ -92,13 +92,25 @@ export class RegistroComponent implements OnInit {
         ficha.setTelefonoDueno(false);
       }
       u.setFichaPublica(ficha);
-      console.log("Ficha en registro component: "+u.getFichaPublica().getEmailDueno());
-      this.registroService.crearUsuario(u).subscribe(user=>u);
-      this.status='Registro satisfactorio.';
-      this.classstatus='alert-success'; 
-      return true;
+      this.status="Registro satisfactorio.";
+      this.classstatus="alert-success";
+      this.registroService.crearUsuario(u).subscribe(user => u, (err:HttpErrorResponse) => {
+        console.log("El error es: "+err.status);
+        if(err.status == 409){
+          this.status="El email ya esta registrado en el sistema.";
+          this.classstatus="alert-danger";
+        }
+        else{
+          this.status="Error desconocido.";
+          this.classstatus="alert-danger";
+        }
+      });
+      window.scroll(0,0);
     }
-    return false;
+    else{
+      this.status="Datos de formulario no se pudieron validar.";
+      this.classstatus="alert-danger";
+    }
   }
 
 }

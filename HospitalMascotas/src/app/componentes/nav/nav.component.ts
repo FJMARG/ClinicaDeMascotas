@@ -9,7 +9,7 @@ import { LoginComponent } from '../login/login.component';
 
 export class NavComponent {
 
-  title = 'Clinica de Mascotas';
+  title = 'Veterinaria Malapata y hnos';
 
   constructor() { }
 

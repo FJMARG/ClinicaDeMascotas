@@ -72,7 +72,7 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 
 	@Override
 	public List<Recordatorio> recuperarRecordatoriosDe(long id) {
-		Query consulta= this.getEntityManager().createQuery("select e.recordatorios from " + getPersistentClass().getSimpleName()+" e where e.id = '"+id);
+		Query consulta= this.getEntityManager().createQuery("select e.recordatorios from " + getPersistentClass().getSimpleName()+" e where e.id = '"+id+"'");
 		@SuppressWarnings("unchecked")
 		List<Recordatorio> resultado = (List<Recordatorio>)consulta.getResultList();
 		return resultado;

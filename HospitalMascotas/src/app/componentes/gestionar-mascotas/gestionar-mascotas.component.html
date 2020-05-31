@@ -2,6 +2,7 @@
 <div class="container">
 
     <!-- Listado Mascotas -->
+    <div *ngIf="mascotas; else elseBlock">
     <div class="row" *ngFor="let mascota of mascotas">
 
       <div class="col-md-3">
@@ -20,10 +21,13 @@
         <p>Señas particulares: {{ mascota.senas }}</p>
       </div>
       <div class="col-md-3">
-        <p><a href="/editarmascota/{{ mascota.id }}">Editar</a></p>
-        <p><a href="/eliminarmascota/{{ mascota.id }}">Eliminar</a></p>
+        <p><a routerLink="/generarqr/{{ mascota.id }}">Generar QR</a></p>
+        <p><a routerLink="/editarmascota/{{ mascota.id }}">Editar</a></p>
+        <p><a routerLink="/eliminarmascota/{{ mascota.id }}">Eliminar</a></p>
       </div>
     </div>
+    </div>
+    <ng-template #elseBlock>No hay mascotas.</ng-template>
     <hr>
 
     <!-- Pagination -->

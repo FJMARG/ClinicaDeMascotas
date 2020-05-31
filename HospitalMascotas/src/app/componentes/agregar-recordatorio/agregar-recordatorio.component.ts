@@ -5,6 +5,7 @@ import { MascotasService } from 'src/app/servicios/mascotas-service';
 import { LocalStorageService } from 'src/app/servicios/local-storage.service';
 import { NgForm } from '@angular/forms';
 import { Recordatorio } from 'src/app/modelos/recordatorio';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-agregar-recordatorio',
@@ -33,16 +34,39 @@ export class AgregarRecordatorioComponent implements OnInit {
     //return this.mascotas;
   }
 
+  validar(form:NgForm){
+    if(!form.valid)
+      return false;
+    if(!(form.value.descripcion))
+      return false;
+    return true;
+  }
+
   agregarRecordatorio(form:NgForm){  
-    if (form.valid){
+    if (this.validar(form)){
       let r = new Recordatorio();
       r.setDescripcion(form.value.descripcion);
       r.setFecha(new Date());
       let id = this.localStorageService.getId();
       let mascotaid = form.value.mascotaid;
-      this.usuarioService.postRecordatorioPara(r, id, mascotaid).subscribe(recordatorio=>r);
       this.status='El recordatorio fue registrado correctamente.';
       this.classstatus='alert-success'; 
+      this.usuarioService.postRecordatorioPara(r, id, mascotaid).subscribe(recordatorio=>r, (err:HttpErrorResponse) => {
+        console.log("El error es: "+err.status);
+        if(err.status == 409){
+          this.status="Mascota o usuario inexistente en el sistema.";
+          this.classstatus="alert-danger";
+        }
+        else{
+          this.status="Error desconocido.";
+          this.classstatus="alert-danger";
+        }
+      });
+      window.scroll(0,0);
+    }
+    else{
+      this.status='Formulario invalido.';
+      this.classstatus='alert-danger'; 
     }
   }
 

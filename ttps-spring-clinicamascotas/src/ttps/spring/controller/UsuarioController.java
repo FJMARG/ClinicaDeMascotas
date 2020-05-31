@@ -127,6 +127,9 @@ public class UsuarioController {
 		if (usuarioActual == null) {
 			return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
 		}
+		Usuario temp = uDAO.recuperar(usuario.getEmail());
+		if (temp != null && (!usuarioActual.getEmail().equals(usuario.getEmail())))
+			return new ResponseEntity<Usuario>(HttpStatus.CONFLICT);
 		usuarioActual.setNombre(usuario.getNombre());
 		usuarioActual.setApellido(usuario.getApellido());
 		usuarioActual.setEmail(usuario.getEmail());

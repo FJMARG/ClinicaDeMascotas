@@ -1,0 +1,75 @@
+<div class="container _padding-top">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="offset-md-3 col-md-6 offset-md-3">
+            <div class="alert {{classstatus}}" role="alert">{{status}}</div>
+            <div *ngIf = "mascotas && mascotas.length != 0; else block">
+            <form #visitaForm="ngForm" (ngSubmit)="registrar(visitaForm)" class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="mascota" class="cols-sm-2 control-label">Mascota y dueño:</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <select class="form-control" name="mascota" id="mascota" ngModel>
+                                        <option *ngFor="let mascota of mascotas" value="{{mascota.id}}">{{mascota.nombre}} -> {{mascota.dueno.apellido}}, {{mascota.dueno.nombre}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="fecha" class="cols-sm-2 control-label">Fecha:</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="date" class="form-control" name="fecha" id="fecha" ngModel>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="resultado" class="cols-sm-2 control-label">Resultado:</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="resultado" id="resultado" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="indicaciones" class="cols-sm-2 control-label">Droga:</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="droga" id="droga" ngModel/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Registrar</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <button type="reset" class="btn btn-secondary btn-lg btn-block">Vaciar Campos</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+            <ng-template #block>
+                <p>No tienes mascotas asignadas.</p>
+            </ng-template>
+        </div>
+    </div>
+</div> <!-- /container -->

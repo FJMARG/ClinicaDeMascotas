@@ -2,6 +2,7 @@
     <!-- Example row of columns -->
     <div class="row">
         <div class="offset-md-3 col-md-6 offset-md-3">
+            <div *ngIf="mascotas; else elseBlock">
             <div class="alert {{classstatus}}" role="alert">{{status}}</div>
             <form #agregarRecordatorioForm="ngForm" (ngSubmit)="agregarRecordatorio(agregarRecordatorioForm)" class="form-horizontal">
                 <div class="row">
@@ -43,6 +44,9 @@
                     </div>
                 </div>
             </form>
+            </div>
+            <ng-template #elseBlock>No hay mascotas.</ng-template>
         </div>
     </div>
+    <hr>
 </div> <!-- /container -->
